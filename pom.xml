@@ -10,6 +10,8 @@
 
     <properties>
         <lwjgl.version>3.0.0b-SNAPSHOT</lwjgl.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <repositories>
@@ -40,7 +42,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.3.1</version>
+            <version>2.4</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -81,6 +83,5 @@
             <version>${lwjgl.version}</version>
             <classifier>natives-linux</classifier>
         </dependency>
-
     </dependencies>
 </project>
