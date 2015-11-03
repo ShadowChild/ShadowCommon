@@ -38,7 +38,7 @@ class JsonConfig extends Config {
         }
 
         // Adds ".json" to a filename without one, allows for using "General" instead of "General.json"
-        if (!trueFileName.contains(".json")) trueFileName.replace("", ".json");
+        if (!trueFileName.contains(".json")) trueFileName += ".json";
 
         File file = new File("." + "/" + truePath, trueFileName);
 

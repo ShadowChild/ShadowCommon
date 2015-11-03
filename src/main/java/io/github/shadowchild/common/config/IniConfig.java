@@ -15,7 +15,7 @@ class IniConfig extends Config {
 
     public Ini ini;
 
-    IniConfig(@NotNull String fileName) {
+    public IniConfig(@NotNull String fileName) {
         super(fileName);
         this.ini = loadIni();
     }
@@ -33,7 +33,7 @@ class IniConfig extends Config {
                 }
 
                 // Adds ".ini" to a filename without one, allows for using "General" instead of "General.ini"
-                if(!trueFileName.contains(".ini")) trueFileName.replace("", ".ini");
+                if(!trueFileName.contains(".ini")) trueFileName += ".ini";
 
                 File file = new File("." + "/" + truePath, trueFileName);
 
