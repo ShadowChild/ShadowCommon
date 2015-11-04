@@ -1,2 +1,3 @@
 Finish JsonConfig
 Merge Config & Configuration - Should be easy
+Remove any instanced of @NotNull, or make maven aware of the annotations
