@@ -1,6 +1,5 @@
 package io.github.shadowchild.common.config;
 
-import com.sun.istack.internal.NotNull;
 import org.apache.commons.io.FileUtils;
 import org.ini4j.Ini;
 
@@ -15,38 +14,38 @@ class IniConfig extends Config {
 
     public Ini ini;
 
-    public IniConfig(@NotNull String fileName) {
+    public IniConfig(String fileName) {
         super(fileName);
         this.ini = loadIni();
     }
 
-    private Ini loadIni(){
+    private Ini loadIni() {
 
         String truePath = "";
-                String trueFileName = fileName;
+        String trueFileName = fileName;
 
-                if(fileName.contains("/") || fileName.contains("\\")) {
+        if (fileName.contains("/") || fileName.contains("\\")) {
 
-                    int slashIndex = !fileName.contains("/") ? fileName.indexOf("\\") : fileName.indexOf("/");
-                    truePath = fileName.substring(0, slashIndex);
-                    trueFileName = fileName.substring(slashIndex);
-                }
+            int slashIndex = !fileName.contains("/") ? fileName.indexOf("\\") : fileName.indexOf("/");
+            truePath = fileName.substring(0, slashIndex);
+            trueFileName = fileName.substring(slashIndex);
+        }
 
-                // Adds ".ini" to a filename without one, allows for using "General" instead of "General.ini"
-                if(!trueFileName.contains(".ini")) trueFileName += ".ini";
+        // Adds ".ini" to a filename without one, allows for using "General" instead of "General.ini"
+        if (!trueFileName.contains(".ini")) trueFileName += ".ini";
 
-                File file = new File("." + "/" + truePath, trueFileName);
+        File file = new File("." + "/" + truePath, trueFileName);
 
-                if(!file.exists()) {
+        if (!file.exists()) {
 
-                    try{
+            try {
 
-                        if(!file.getParentFile().exists()) file.getParentFile().mkdirs();
+                if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
 
-                        file.createNewFile();
+                file.createNewFile();
 
                 return createIni(file);
-            }catch(IOException e){
+            } catch (IOException e) {
 
                 //MOD.getLogger().error("Cannot create config file, this shouldn't happen.");
                 e.printStackTrace();
@@ -56,22 +55,22 @@ class IniConfig extends Config {
 
             Ini ini = createIni(file);
 
-            try{
+            try {
 
                 ini.load(file);
                 return ini;
-            }catch(IOException e){
+            } catch (IOException e) {
 
                 //MOD.getLogger().error("Could not load config file, making backup then loading defaults.");
-                try{
+                try {
 
                     File backup = new File(file.getParent(), trueFileName + ".ini");
-                    if(backup.exists()){
+                    if (backup.exists()) {
 
                         backup.delete();
                     }
                     FileUtils.copyFile(file, backup, false);
-                }catch(IOException e1){
+                } catch (IOException e1) {
 
                     e1.printStackTrace();
                 }
@@ -81,20 +80,20 @@ class IniConfig extends Config {
         }
     }
 
-    private Ini createIni(File file){
+    private Ini createIni(File file) {
 
         Ini ini = new Ini();
         ini.setFile(file);
         return ini;
     }
 
-    private boolean checkSectionExists(Ini ini, String section){
+    private boolean checkSectionExists(Ini ini, String section) {
 
         Set<String> sections = ini.keySet();
 
-        for(String section1 : sections){
+        for (String section1 : sections) {
 
-            if(section1.equals(section)) return true;
+            if (section1.equals(section)) return true;
         }
         return false;
     }
@@ -103,19 +102,19 @@ class IniConfig extends Config {
 
         Ini.Section section = checkSectionExists(ini, catergory) ? ini.get(catergory) : ini.add(catergory);
         String stringVal = section.get(key);
-        if(stringVal == null || stringVal.isEmpty()) {
+        if (stringVal == null || stringVal.isEmpty()) {
 
             stringVal = defValue + "";
             section.add(key, stringVal);
-            try{
+            try {
 
                 ini.store();
-            }catch(IOException e){
+            } catch (IOException e) {
 
                 e.printStackTrace();
             }
         }
-        if(comment != null && !comment.isEmpty()){
+        if (comment != null && !comment.isEmpty()) {
 
             section.putComment(key, " " + comment);
             try {
@@ -127,24 +126,39 @@ class IniConfig extends Config {
             }
         }
         Object returnValue = section.fetch(key);
-        String val = (String)returnValue;
-        switch(type){
+        String val = (String) returnValue;
+        switch (type) {
 
-            case INT: returnValue = Integer.valueOf(val); break;
+            case INT:
+                returnValue = Integer.valueOf(val);
+                break;
 
-            case SHORT: returnValue = Short.valueOf(val); break;
+            case SHORT:
+                returnValue = Short.valueOf(val);
+                break;
 
-            case LONG: returnValue = Long.valueOf(val); break;
+            case LONG:
+                returnValue = Long.valueOf(val);
+                break;
 
-            case BYTE: returnValue = Byte.valueOf(val); break;
+            case BYTE:
+                returnValue = Byte.valueOf(val);
+                break;
 
-            case DOUBLE: returnValue = Double.valueOf(val); break;
+            case DOUBLE:
+                returnValue = Double.valueOf(val);
+                break;
 
-            case FLOAT: returnValue = Float.valueOf(val); break;
+            case FLOAT:
+                returnValue = Float.valueOf(val);
+                break;
 
-            case BOOL: returnValue = Boolean.valueOf(val); break;
+            case BOOL:
+                returnValue = Boolean.valueOf(val);
+                break;
 
-            case STRING: break;
+            case STRING:
+                break;
         }
         return returnValue;
     }

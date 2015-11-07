@@ -1,7 +1,5 @@
 package io.github.shadowchild.common.config;
 
-import com.sun.istack.internal.NotNull;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -30,7 +28,7 @@ public class Configuration {
         }
     }
 
-    public Configuration(ConfigType type, @NotNull String fileName) {
+    public Configuration(ConfigType type, String fileName) {
 
         this.type = type;
         this.fileName = fileName;
