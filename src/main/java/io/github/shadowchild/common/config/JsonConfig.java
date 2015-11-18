@@ -57,7 +57,7 @@ class JsonConfig extends Config {
             try {
 
                 return createJsonObject(true, file);
-            } catch(IOException e) {
+            } catch (IOException e) {
 
                 try {
 
@@ -79,7 +79,7 @@ class JsonConfig extends Config {
 
     private JsonObject createJsonObject(boolean exists, File file) throws FileNotFoundException {
 
-        if(exists) {
+        if (exists) {
 
             FileReader fr = new FileReader(file);
             JsonReader jr = new JsonReader(fr);
@@ -100,12 +100,12 @@ class JsonConfig extends Config {
         JsonObject cat = checkCategoryExists(root, category) ? root.getAsJsonObject(category) : newObject(category);
 
         // If the category has the key, obtain and return it
-        if(cat.has(key)) {
+        if (cat.has(key)) {
 
             JsonElement element = cat.get(key);
-            if(element instanceof JsonObject) {
+            if (element instanceof JsonObject) {
 
-                if(((JsonObject) element).has("Value")) {
+                if (((JsonObject) element).has("Value")) {
 
                     return ((JsonObject) element).get("Value");
                 }
@@ -115,7 +115,7 @@ class JsonConfig extends Config {
         }
 
         // if not, attempt to write it to file
-        if(comment != null && !comment.isEmpty()) {
+        if (comment != null && !comment.isEmpty()) {
 
             JsonObject commentedValue = new JsonObject();
             writeProperty(commentedValue, "Value", defaultValue);
@@ -164,18 +164,18 @@ class JsonConfig extends Config {
 
     private void writeProperty(JsonObject obj, String key, Object value) {
 
-        if(value instanceof Number) {
+        if (value instanceof Number) {
 
-            obj.addProperty(key, (Number)value);
+            obj.addProperty(key, (Number) value);
         } else if (value instanceof Boolean) {
 
-            obj.addProperty(key, (Boolean)value);
-        } else if(value instanceof Character) {
+            obj.addProperty(key, (Boolean) value);
+        } else if (value instanceof Character) {
 
-            obj.addProperty(key, (Character)value);
+            obj.addProperty(key, (Character) value);
         } else if (value instanceof String) {
 
-            obj.addProperty(key, (String)value);
+            obj.addProperty(key, (String) value);
         }
     }
 
