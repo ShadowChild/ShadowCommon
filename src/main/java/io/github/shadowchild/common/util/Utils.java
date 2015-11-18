@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Observer;
 
+import org.apache.commons.io;
+
 /**
  * Created by Zach Piddock on 07/11/2015.
  */
@@ -51,10 +53,33 @@ public class Utils {
         download.download();
     }
 
-    // Get file name portion of URL.
+    /**
+     * Gets the file name from a supplied URL
+     * 
+     * @param url - The URL to get the file name from
+     * @return - The String of the filename from the URL
+     */
     public static String getFileName(URL url) {
 
         String fileName = url.getFile();
         return fileName.substring(fileName.lastIndexOf('/') + 1);
+    }
+    
+    public static Object[] toHumanReadable(long size) {
+     
+        String ret = FileUtils.byteCountToDisplaySize(size);
+        int index = 0;
+        
+        for(char c : ret) {
+            
+            if(Integer.getInteger("" + c) != null) {
+                break;
+            }
+            index++;
+        }
+        int number = Integer.getInteger(ret.substring(0, index));
+        String str = ret.substring(index);
+        
+        return new Object[] { number, str };
     }
 }
