@@ -1,11 +1,11 @@
 package io.github.shadowchild.common.util;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Observer;
-
-import org.apache.commons.io;
 
 /**
  * Created by Zach Piddock on 07/11/2015.
@@ -68,19 +68,8 @@ public class Utils {
     public static Object[] toHumanReadable(long size) {
      
         String ret = FileUtils.byteCountToDisplaySize(size);
-        int index;
+        String[] split = ret.split(" ");
         
-        for(int i = 0; i < ret.length; i++) {
-            
-            if(Integer.getInteger("" + ret.charAt(i)) == null){
-                
-                index = i;
-                break;
-            }
-        }
-        int number = Integer.getInteger(ret.substring(0, index));
-        String str = ret.substring(index);
-        
-        return new Object[] { number, str };
+        return split;
     }
 }

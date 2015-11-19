@@ -13,7 +13,7 @@ import java.util.Observer;
  * Created by Zach Piddock on 18/11/2015.
  */
 public class DownloadObserverTest extends JDialog {
-    
+
     private JPanel contentPane;
     private JButton downloadButton;
     private JProgressBar progressBar1;
