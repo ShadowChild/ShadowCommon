@@ -1,4 +1,5 @@
 import io.github.shadowchild.common.util.Utils;
+import org.apache.commons.math3.util.Pair;
 
 import java.io.IOException;
 
@@ -12,7 +13,10 @@ public class DownloadTest {
         try {
 
             Utils.downloadFile("http://build.lwjgl.org/stable/lwjgl.zip");
-        } catch (IOException e) {
+            Pair<Float, String> size = Utils.humanReadableByteCount(45645645456L);
+            System.out.println(
+                    String.format("Size = %s, Type = %s", size.getFirst(), size.getSecond()));
+        } catch(IOException e) {
 
             e.printStackTrace();
         }

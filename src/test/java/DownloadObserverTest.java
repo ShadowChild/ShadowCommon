@@ -3,7 +3,9 @@ import io.github.shadowchild.common.util.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
@@ -27,22 +29,29 @@ public class DownloadObserverTest extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(downloadButton);
 
-// call onCancel() when cross is clicked
+        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
+
             public void windowClosing(WindowEvent e) {
+
                 onCancel();
             }
         });
 
-// call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        // call onCancel() on ESCAPE
+        contentPane.registerKeyboardAction(e -> onCancel(),
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT
+        );
         downloadButton.addActionListener(e -> {
 
             try {
 
-                Utils.downloadFile("http://build.lwjgl.org/stable/lwjgl.zip", new DownloadObserver(), new File(".", "test"));
-            } catch (IOException e1) {
+                Utils.downloadFile("http://build.lwjgl.org/stable/lwjgl.zip",
+                        new DownloadObserver(), new File(".", "test")
+                );
+            } catch(IOException e1) {
 
                 e1.printStackTrace();
             }
@@ -70,12 +79,12 @@ public class DownloadObserverTest extends JDialog {
         @Override
         public void update(Observable o, Object arg) {
 
-            Download download = (Download) o;
-            switch (download.getStatus()) {
+            Download download = (Download)o;
+            switch(download.getStatus()) {
 
                 case Download.DOWNLOADING: {
 
-                    dialog.progressBar1.setValue((int) download.getProgress());
+                    dialog.progressBar1.setValue((int)download.getProgress());
                     break;
                 }
                 case Download.COMPLETE: {

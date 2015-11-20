@@ -1,5 +1,6 @@
 package io.github.shadowchild.common.util;
 
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -17,8 +18,7 @@ public class Download extends Observable implements Runnable {
     private static final int MAX_BUFFER_SIZE = 4096;
 
     // These are the status names.
-    public static final String STATUSES[] = {"Downloading",
-            "Paused", "Complete", "Cancelled", "Error"};
+    public static final String STATUSES[] = { "Downloading", "Paused", "Complete", "Cancelled", "Error" };
 
     // These are the status codes.
     public static final int DOWNLOADING = 0;
@@ -36,6 +36,7 @@ public class Download extends Observable implements Runnable {
 
     // Constructor for Download.
     public Download(URL url, Observer observer, File folder) {
+
         this.url = url;
         size = -1;
         downloaded = 0;
@@ -56,32 +57,38 @@ public class Download extends Observable implements Runnable {
 
     // Get this download's URL.
     public String getUrl() {
+
         return url.toString();
     }
 
     // Get this download's size.
     public int getSize() {
+
         return size;
     }
 
     // Get this download's progress.
     public float getProgress() {
-        return ((float) downloaded / size) * 100;
+
+        return ((float)downloaded / size) * 100;
     }
 
     // Get this download's status.
     public int getStatus() {
+
         return status;
     }
 
     // Pause this download.
     public void pause() {
+
         status = PAUSED;
         stateChanged();
     }
 
     // Resume this download.
     public void resume() {
+
         status = DOWNLOADING;
         stateChanged();
         download();
@@ -89,72 +96,74 @@ public class Download extends Observable implements Runnable {
 
     // Cancel this download.
     public void cancel() {
+
         status = CANCELLED;
         stateChanged();
     }
 
     // Mark this download as having an error.
     private void error() {
+
         status = ERROR;
         stateChanged();
     }
 
     // Start or resume downloading.
     public void download() {
+
         Thread thread = new Thread(this);
         thread.start();
     }
 
     // Download file.
     public void run() {
+
         File file;
         InputStream stream = null;
         FileOutputStream outputStream = null;
 
         try {
             // Open connection to URL.
-            HttpURLConnection connection =
-                    (HttpURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
             // Specify what portion of file to download.
-            connection.setRequestProperty("Range",
-                    "bytes=" + downloaded + "-");
+            connection.setRequestProperty("Range", "bytes=" + downloaded + "-");
 
             // Connect to server.
             connection.connect();
 
             // Make sure response code is in the 200 range.
-            if (connection.getResponseCode() / 100 != 2) {
+            if(connection.getResponseCode() / 100 != 2) {
                 error();
             }
 
             // Check for valid content length.
             int contentLength = connection.getContentLength();
-            if (contentLength < 1) {
+            if(contentLength < 1) {
                 error();
             }
 
       /* Set the size for this download if it
          hasn't been already set. */
-            if (size == -1) {
+            if(size == -1) {
                 size = contentLength;
                 stateChanged();
             }
 
             file = new File(folder, Utils.getFileName(url));
 
-            if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
+            if(!file.getParentFile().exists()) file.getParentFile().mkdirs();
             outputStream = new FileOutputStream(file);
 
             stream = connection.getInputStream();
-            while (status == DOWNLOADING) {
+            while(status == DOWNLOADING) {
         /* Size buffer according to how much of the
            file is left to download. */
-//                if(downloaded >= size)
-//                    break;
+                //                if(downloaded >= size)
+                //                    break;
 
                 byte buffer[];
-                if (size - downloaded > MAX_BUFFER_SIZE) {
+                if(size - downloaded > MAX_BUFFER_SIZE) {
                     buffer = new byte[MAX_BUFFER_SIZE];
                 } else {
                     buffer = new byte[size - downloaded];
@@ -162,8 +171,7 @@ public class Download extends Observable implements Runnable {
 
                 // Read from server into buffer.
                 int read = stream.read(buffer);
-                if (read == -1)
-                    break;
+                if(read == -1) break;
 
                 // Write buffer to file.
                 outputStream.write(buffer, 0, read);
@@ -173,28 +181,28 @@ public class Download extends Observable implements Runnable {
 
       /* Change status to complete if this point was
          reached because downloading has finished. */
-            if (status == DOWNLOADING) {
+            if(status == DOWNLOADING) {
                 status = COMPLETE;
                 stateChanged();
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
             error();
             e.printStackTrace();
         } finally {
             // Close file.
-            if (outputStream != null) {
+            if(outputStream != null) {
                 try {
                     outputStream.close();
-                } catch (Exception e) {
+                } catch(Exception e) {
                     e.printStackTrace();
                 }
             }
 
             // Close connection to server.
-            if (stream != null) {
+            if(stream != null) {
                 try {
                     stream.close();
-                } catch (Exception e) {
+                } catch(Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -203,6 +211,7 @@ public class Download extends Observable implements Runnable {
 
     // Notify observers that this download's status has changed.
     private void stateChanged() {
+
         setChanged();
         notifyObservers();
     }
@@ -212,12 +221,15 @@ public class Download extends Observable implements Runnable {
         @Override
         public void update(Observable o, Object arg) {
 
-            Download download = (Download) o;
+            Download download = (Download)o;
 
-            switch (download.status) {
+            switch(download.status) {
 
                 case DOWNLOADING: {
-                    System.out.println("Progress = " + download.getProgress() + ", " + download.downloaded + " / " + download.size);
+
+                    System.out.println("Progress = " + download.getProgress() + ", " +
+                            Utils.humanReadableByteCount(download.downloaded, false) + " / " +
+                            Utils.humanReadableByteCount(download.size, false));
                     break;
                 }
                 case COMPLETE: {

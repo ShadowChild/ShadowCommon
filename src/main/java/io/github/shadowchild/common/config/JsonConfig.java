@@ -1,10 +1,20 @@
 package io.github.shadowchild.common.config;
 
-import com.google.gson.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.stream.JsonReader;
 import org.apache.commons.io.FileUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Created by Zach Piddock on 03/11/2015.
@@ -25,29 +35,30 @@ class JsonConfig extends Config {
         String truePath = "";
         String trueFileName = fileName;
 
-        if (fileName.contains("/") || fileName.contains("\\")) {
+        if(fileName.contains("/") || fileName.contains("\\")) {
 
-            int slashIndex = !fileName.contains("/") ? fileName.indexOf("\\") : fileName.indexOf("/");
+            int slashIndex = !fileName.contains("/") ? fileName.indexOf("\\") : fileName.indexOf(
+                    "/");
             truePath = fileName.substring(0, slashIndex);
             trueFileName = fileName.substring(slashIndex);
         }
 
         // Adds ".json" to a filename without one, allows for using "General" instead of "General.json"
-        if (!trueFileName.contains(".json")) trueFileName += ".json";
+        if(!trueFileName.contains(".json")) trueFileName += ".json";
 
         File file = new File("." + "/" + truePath, trueFileName);
         this.file = file;
 
-        if (!file.exists()) {
+        if(!file.exists()) {
 
             try {
 
-                if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
+                if(!file.getParentFile().exists()) file.getParentFile().mkdirs();
 
                 file.createNewFile();
 
                 return createJsonObject(false, file);
-            } catch (IOException e) {
+            } catch(IOException e) {
 
                 e.printStackTrace();
                 return new JsonObject();
@@ -57,17 +68,17 @@ class JsonConfig extends Config {
             try {
 
                 return createJsonObject(true, file);
-            } catch (IOException e) {
+            } catch(IOException e) {
 
                 try {
 
                     File backup = new File(file.getParent(), trueFileName + ".json");
-                    if (backup.exists()) {
+                    if(backup.exists()) {
 
                         backup.delete();
                     }
                     FileUtils.copyFile(file, backup, false);
-                } catch (IOException e1) {
+                } catch(IOException e1) {
 
                     e1.printStackTrace();
                 }
@@ -79,7 +90,7 @@ class JsonConfig extends Config {
 
     private JsonObject createJsonObject(boolean exists, File file) throws FileNotFoundException {
 
-        if (exists) {
+        if(exists) {
 
             FileReader fr = new FileReader(file);
             JsonReader jr = new JsonReader(fr);
@@ -97,17 +108,18 @@ class JsonConfig extends Config {
     public Object get(Type type, String category, String key, Object defaultValue, String comment) {
 
         // TODO: Implement arrays
-        JsonObject cat = checkCategoryExists(root, category) ? root.getAsJsonObject(category) : newObject(category);
+        JsonObject cat = checkCategoryExists(root, category) ? root.getAsJsonObject(
+                category) : newObject(category);
 
         // If the category has the key, obtain and return it
-        if (cat.has(key)) {
+        if(cat.has(key)) {
 
             JsonElement element = cat.get(key);
-            if (element instanceof JsonObject) {
+            if(element instanceof JsonObject) {
 
-                if (((JsonObject) element).has("Value")) {
+                if(((JsonObject)element).has("Value")) {
 
-                    return ((JsonObject) element).get("Value");
+                    return ((JsonObject)element).get("Value");
                 }
                 return element;
             }
@@ -115,7 +127,7 @@ class JsonConfig extends Config {
         }
 
         // if not, attempt to write it to file
-        if (comment != null && !comment.isEmpty()) {
+        if(comment != null && !comment.isEmpty()) {
 
             JsonObject commentedValue = new JsonObject();
             writeProperty(commentedValue, "Value", defaultValue);
@@ -143,7 +155,7 @@ class JsonConfig extends Config {
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(output.getBytes());
             fos.close();
-        } catch (IOException e) {
+        } catch(IOException e) {
 
             e.printStackTrace();
         }
@@ -164,66 +176,70 @@ class JsonConfig extends Config {
 
     private void writeProperty(JsonObject obj, String key, Object value) {
 
-        if (value instanceof Number) {
+        if(value instanceof Number) {
 
-            obj.addProperty(key, (Number) value);
-        } else if (value instanceof Boolean) {
+            obj.addProperty(key, (Number)value);
+        } else if(value instanceof Boolean) {
 
-            obj.addProperty(key, (Boolean) value);
-        } else if (value instanceof Character) {
+            obj.addProperty(key, (Boolean)value);
+        } else if(value instanceof Character) {
 
-            obj.addProperty(key, (Character) value);
-        } else if (value instanceof String) {
+            obj.addProperty(key, (Character)value);
+        } else if(value instanceof String) {
 
-            obj.addProperty(key, (String) value);
+            obj.addProperty(key, (String)value);
         }
     }
 
     @Override
     public byte getByte(String category, String key, byte defaultValue, String comment) {
 
-        return ((JsonPrimitive) get(Type.BYTE, category, key, defaultValue, comment)).getAsByte();
+        return ((JsonPrimitive)get(Type.BYTE, category, key, defaultValue, comment)).getAsByte();
     }
 
     @Override
     public double getDouble(String category, String key, double defaultValue, String comment) {
 
-        return ((JsonPrimitive) get(Type.DOUBLE, category, key, defaultValue, comment)).getAsDouble();
+        return ((JsonPrimitive)get(Type.DOUBLE, category, key, defaultValue,
+                comment
+        )).getAsDouble();
     }
 
     @Override
     public String getString(String category, String key, String defaultValue, String comment) {
 
-        return ((JsonPrimitive) get(Type.STRING, category, key, defaultValue, comment)).getAsString();
+        return ((JsonPrimitive)get(Type.STRING, category, key, defaultValue,
+                comment
+        )).getAsString();
     }
 
     @Override
     public int getInteger(String category, String key, int defaultValue, String comment) {
 
-        return ((JsonPrimitive) get(Type.INT, category, key, defaultValue, comment)).getAsInt();
+        return ((JsonPrimitive)get(Type.INT, category, key, defaultValue, comment)).getAsInt();
     }
 
     @Override
     public short getShort(String category, String key, short defaultValue, String comment) {
 
-        return ((JsonPrimitive) get(Type.SHORT, category, key, defaultValue, comment)).getAsShort();
+        return ((JsonPrimitive)get(Type.SHORT, category, key, defaultValue, comment)).getAsShort();
     }
 
     @Override
     public long getLong(String category, String key, long defaultValue, String comment) {
 
-        return ((JsonPrimitive) get(Type.LONG, category, key, defaultValue, comment)).getAsLong();
+        return ((JsonPrimitive)get(Type.LONG, category, key, defaultValue, comment)).getAsLong();
     }
 
     @Override
     public float getFloat(String category, String key, float defaultValue, String comment) {
 
-        return ((JsonPrimitive) get(Type.FLOAT, category, key, defaultValue, comment)).getAsFloat();
+        return ((JsonPrimitive)get(Type.FLOAT, category, key, defaultValue, comment)).getAsFloat();
     }
 
     @Override
     public boolean getBoolean(String category, String key, boolean defaultValue, String comment) {
 
-        return ((JsonPrimitive) get(Type.BOOL, category, key, defaultValue, comment)).getAsBoolean();
+        return ((JsonPrimitive)get(Type.BOOL, category, key, defaultValue, comment)).getAsBoolean();
     }
 }

@@ -1,5 +1,6 @@
 package io.github.shadowchild.common.config;
 
+
 import org.apache.commons.io.FileUtils;
 import org.ini4j.Ini;
 
@@ -15,6 +16,7 @@ class IniConfig extends Config {
     public Ini ini;
 
     public IniConfig(String fileName) {
+
         super(fileName);
         this.ini = loadIni();
     }
@@ -24,28 +26,29 @@ class IniConfig extends Config {
         String truePath = "";
         String trueFileName = fileName;
 
-        if (fileName.contains("/") || fileName.contains("\\")) {
+        if(fileName.contains("/") || fileName.contains("\\")) {
 
-            int slashIndex = !fileName.contains("/") ? fileName.indexOf("\\") : fileName.indexOf("/");
+            int slashIndex = !fileName.contains("/") ? fileName.indexOf("\\") : fileName.indexOf(
+                    "/");
             truePath = fileName.substring(0, slashIndex);
             trueFileName = fileName.substring(slashIndex);
         }
 
         // Adds ".ini" to a filename without one, allows for using "General" instead of "General.ini"
-        if (!trueFileName.contains(".ini")) trueFileName += ".ini";
+        if(!trueFileName.contains(".ini")) trueFileName += ".ini";
 
         File file = new File("." + "/" + truePath, trueFileName);
 
-        if (!file.exists()) {
+        if(!file.exists()) {
 
             try {
 
-                if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
+                if(!file.getParentFile().exists()) file.getParentFile().mkdirs();
 
                 file.createNewFile();
 
                 return createIni(file);
-            } catch (IOException e) {
+            } catch(IOException e) {
 
                 //MOD.getLogger().error("Cannot create config file, this shouldn't happen.");
                 e.printStackTrace();
@@ -59,18 +62,18 @@ class IniConfig extends Config {
 
                 ini.load(file);
                 return ini;
-            } catch (IOException e) {
+            } catch(IOException e) {
 
                 //MOD.getLogger().error("Could not load config file, making backup then loading defaults.");
                 try {
 
                     File backup = new File(file.getParent(), trueFileName + ".ini");
-                    if (backup.exists()) {
+                    if(backup.exists()) {
 
                         backup.delete();
                     }
                     FileUtils.copyFile(file, backup, false);
-                } catch (IOException e1) {
+                } catch(IOException e1) {
 
                     e1.printStackTrace();
                 }
@@ -91,43 +94,44 @@ class IniConfig extends Config {
 
         Set<String> sections = ini.keySet();
 
-        for (String section1 : sections) {
+        for(String section1 : sections) {
 
-            if (section1.equals(section)) return true;
+            if(section1.equals(section)) return true;
         }
         return false;
     }
 
     public Object get(Type type, String catergory, String key, Object defValue, String comment) {
 
-        Ini.Section section = checkSectionExists(ini, catergory) ? ini.get(catergory) : ini.add(catergory);
+        Ini.Section section = checkSectionExists(ini, catergory) ? ini.get(catergory) : ini.add(
+                catergory);
         String stringVal = section.get(key);
-        if (stringVal == null || stringVal.isEmpty()) {
+        if(stringVal == null || stringVal.isEmpty()) {
 
             stringVal = defValue + "";
             section.add(key, stringVal);
             try {
 
                 ini.store();
-            } catch (IOException e) {
+            } catch(IOException e) {
 
                 e.printStackTrace();
             }
         }
-        if (comment != null && !comment.isEmpty()) {
+        if(comment != null && !comment.isEmpty()) {
 
             section.putComment(key, " " + comment);
             try {
 
                 ini.store();
-            } catch (IOException e) {
+            } catch(IOException e) {
 
                 e.printStackTrace();
             }
         }
         Object returnValue = section.fetch(key);
-        String val = (String) returnValue;
-        switch (type) {
+        String val = (String)returnValue;
+        switch(type) {
 
             case INT:
                 returnValue = Integer.valueOf(val);

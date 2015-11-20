@@ -1,5 +1,6 @@
 package io.github.shadowchild.common.config;
 
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -24,6 +25,7 @@ public class Configuration {
         }
 
         public Class<? extends Config> getClazz() {
+
             return clazz;
         }
     }
@@ -44,8 +46,8 @@ public class Configuration {
 
             Constructor constructor = clazz.getConstructor(String.class);
 
-            conf = (Config) constructor.newInstance(fileName);
-        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            conf = (Config)constructor.newInstance(fileName);
+        } catch(NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
 
             e.printStackTrace();
         }
