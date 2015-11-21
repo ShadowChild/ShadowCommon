@@ -1,6 +1,8 @@
 package io.github.shadowchild.common.util;
 
 
+import net.sf.sevenzipjbinding.SevenZip;
+import net.sf.sevenzipjbinding.SevenZipNativeInitializationException;
 import org.apache.commons.math3.util.Pair;
 
 import java.io.File;
@@ -96,5 +98,16 @@ public class Utils {
     public static Pair<Float, String> humanReadableByteCount(long bytes) {
 
         return humanReadableByteCount(bytes, true);
+    }
+
+    public static void initialise() {
+
+        try {
+
+            SevenZip.initSevenZipFromPlatformJAR();
+        } catch(SevenZipNativeInitializationException e) {
+
+            e.printStackTrace();
+        }
     }
 }
