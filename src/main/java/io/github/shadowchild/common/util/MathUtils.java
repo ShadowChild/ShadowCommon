@@ -47,13 +47,11 @@ public class MathUtils {
 
     public static float toDecimal(float value) {
 
-        float decimal = value;
-
-        while(decimal > 1)
+        while(value > 1)
         {
-            decimal /= 10;
+            value /= 10;
         }
-        return decimal;
+        return value;
     }
 
     public static float percentageAsDecimal(float score, float maxScore) {
