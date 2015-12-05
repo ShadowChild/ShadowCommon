@@ -3,3 +3,12 @@ jdk:
     - oraclejdk8
 install: true
 script: mvn install -DskipTests=true
+deploy:
+  provider: releases
+  api_key: "9c4e393a161c6fe1e8309009ce800367f2bd0aca"
+  file: 
+    - "ShadowCommon.jar"
+    - "Deps.jar"
+  skip_cleanup: true
+  on:
+    tags: true
