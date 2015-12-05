@@ -228,8 +228,8 @@ public class Download extends Observable implements Runnable {
                 case DOWNLOADING: {
 
                     System.out.println("Progress = " + download.getProgress() + ", " +
-                            Utils.humanReadableByteCount(download.downloaded, false) + " / " +
-                            Utils.humanReadableByteCount(download.size, false));
+                            MathUtils.humanReadableByteCount(download.downloaded, false) + " / " +
+                            MathUtils.humanReadableByteCount(download.size, false));
                     break;
                 }
                 case COMPLETE: {
