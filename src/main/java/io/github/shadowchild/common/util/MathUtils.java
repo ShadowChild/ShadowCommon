@@ -47,10 +47,13 @@ public class MathUtils {
 
     public static float toDecimal(float value) {
 
-        String str = String.valueOf(value);
-        int length = str.substring(!str.contains(".") ? 0 :  str.indexOf(".")).length();
-        double toDivideBy = Math.pow(10, length);
-        return (float)(value / toDivideBy);
+        float decimal = value;
+
+        while(decimal > 1)
+        {
+            decimal /= 10;
+        }
+        return decimal;
     }
 
     public static float percentageAsDecimal(float score, float maxScore) {
