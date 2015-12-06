@@ -20,6 +20,7 @@ public class MathUtils {
 
         // When using the smallest unit no decimal point is needed, because it's the exact number.
         if(bytes < base) {
+
             return new Pair<>((float)bytes, units[0]);
         }
 
@@ -47,8 +48,8 @@ public class MathUtils {
 
     public static float toDecimal(float value) {
 
-        while(value > 1)
-        {
+        while(value > 1) {
+
             value /= 10;
         }
         return value;
