@@ -48,6 +48,8 @@ public class MathUtils {
 
     public static float toDecimal(float value) {
 
+        if(value < 100) return value / 100;
+
         while(value > 1) {
 
             value /= 10;
