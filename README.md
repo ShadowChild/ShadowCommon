@@ -6,3 +6,9 @@ To install for use in other projects, run the following
 ```
 mvnw.cmd clean install
 ```
+
+or
+
+```
+mvnw clean install
+```
