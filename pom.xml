@@ -92,7 +92,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>19.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -102,7 +102,7 @@
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client</artifactId>
-            <version>1.20.0</version>
+            <version>1.21.0</version>
         </dependency>
 
         <!-- LWJGL Libraries -->
@@ -174,7 +174,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.1</version>
+                <version>2.6</version>
                 <configuration>
                     <outputDirectory>${basedir}/build</outputDirectory>
                 </configuration>
