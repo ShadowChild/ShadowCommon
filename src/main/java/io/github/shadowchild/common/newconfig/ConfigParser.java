@@ -2,14 +2,19 @@ package io.github.shadowchild.common.newconfig;
 
 
 import io.github.shadowchild.common.util.IParser;
+import io.github.shadowchild.common.util.Resource;
 
 /**
  * Created by Zach Piddock on 17/12/2015.
  */
-public class ConfigParser implements IParser<Object> {
+public abstract class ConfigParser implements IParser<Object> {
 
-    @Override
-    public void parse(Object... parseable) {
+    public Resource resource;
 
+    private ConfigParser() {}
+
+    public ConfigParser(Resource resource) {
+
+        this.resource = resource;
     }
 }
