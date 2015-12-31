@@ -11,6 +11,7 @@ import java.util.Set;
 /**
  * Created by Zach Piddock on 22/10/2015.
  */
+@Deprecated
 class IniConfig extends Config {
 
     public Ini ini;

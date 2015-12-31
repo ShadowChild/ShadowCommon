@@ -4,6 +4,7 @@ package io.github.shadowchild.common.config;
 /**
  * Created by Zach Piddock on 03/11/2015.
  */
+@Deprecated
 public abstract class Config {
 
     protected String fileName;

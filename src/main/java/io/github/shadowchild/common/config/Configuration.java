@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by Zach Piddock on 03/11/2015.
  */
+@Deprecated
 public class Configuration {
 
     private ConfigType type;
@@ -40,13 +41,13 @@ public class Configuration {
 
         Config conf = null;
 
-        Class clazz = type.getClazz();
+        Class<? extends Config> clazz = type.getClazz();
 
         try {
 
-            Constructor constructor = clazz.getConstructor(String.class);
+            Constructor<? extends Config> constructor = clazz.getConstructor(String.class);
 
-            conf = (Config)constructor.newInstance(fileName);
+            conf = constructor.newInstance(fileName);
         } catch(NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
 
             e.printStackTrace();

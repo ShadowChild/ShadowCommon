@@ -78,4 +78,6 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
+    public static final boolean BUILT = Utils.class.getProtectionDomain().getCodeSource().getLocation().getPath().endsWith(".jar");
 }

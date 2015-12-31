@@ -19,6 +19,7 @@ import java.io.IOException;
 /**
  * Created by Zach Piddock on 03/11/2015.
  */
+@Deprecated
 class JsonConfig extends Config {
 
     private JsonObject root;
