@@ -10,7 +10,8 @@ abstract class Config {
 
     }
 
-    public Property get(EnumPropType type) {
+    public Property get(Property.EnumPropType type) {
 
+        return null;
     }
 }

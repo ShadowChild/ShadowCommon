@@ -1,8 +1,5 @@
 package io.github.shadowchild.common.newconfig;
 
-import io.github.shadowchild.common.config.IniConfig;
-import io.github.shadowchild.common.config.JsonConfig;
-
 /**
  * Created by Zach Piddock on 31/12/2015.
  */

@@ -60,7 +60,7 @@ public class Property {
         return (List)value;
     }
 
-    enum EnumPropType {
+    public enum EnumPropType {
 
         INT,
         BOOL,
