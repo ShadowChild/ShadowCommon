@@ -6,5 +6,13 @@ package io.github.shadowchild.common.util;
  */
 public interface IParser<T> {
 
-    void parse(T... parseable);
+    default void parseMultiple(T... parseable) {
+
+        for(T p : parseable) {
+
+            parse(p);
+        }
+    }
+
+    void parse(T parseable);
 }
