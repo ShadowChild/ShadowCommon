@@ -8,10 +8,8 @@ public interface IParser<T> {
 
     default void parseMultiple(T... parseable) {
 
-        for(T p : parseable) {
-
+        for(T p : parseable)
             parse(p);
-        }
     }
 
     void parse(T parseable);
