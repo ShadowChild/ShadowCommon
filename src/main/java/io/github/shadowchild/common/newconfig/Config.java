@@ -11,6 +11,7 @@ public abstract class Config {
     final Resource location;
     final EnumConfigType type;
 
+
     public Config(Resource location, EnumConfigType type) {
 
         this.location = location;
@@ -19,6 +20,7 @@ public abstract class Config {
     }
 
     public void load() {
+
 
     }
 
