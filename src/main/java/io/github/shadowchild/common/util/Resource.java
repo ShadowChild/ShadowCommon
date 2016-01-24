@@ -2,34 +2,32 @@ package io.github.shadowchild.common.util;
 
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * Created by Zach Piddock on 17/12/2015.
  */
 public class Resource {
 
-    private final String location;
-    private final boolean isURL;
-    private boolean readOnly = false;
+    protected final String resourceType;
+    protected final String location;
+    protected boolean readOnly = false;
 
-    public Resource(String location) {
+    public Resource(String resource) {
 
-        boolean b;
+        String resourceType;
+        String location;
 
-        try {
+        if(resource.contains(":")) {
 
-            new URL(location);
-            // didnt cause and exception so assume it's a real URL
-            b = true;
-        } catch(MalformedURLException e) {
+            resourceType = resource.substring(0, resource.indexOf(":"));
+            location = resource.substring(resource.indexOf(":") + 1);
+        } else {
 
-            b = false;
+            resourceType = "textures";
+            location = resource;
         }
-
-        this.isURL = b;
-        this.location = location;
+        this.resourceType = resourceType;
+        this.location = "/assets/" + resourceType + "/" + location;
     }
 
     public String getLocation() {
@@ -37,20 +35,17 @@ public class Resource {
         return location;
     }
 
-    public boolean isURL() {
+    public String getResourceType() {
 
-        return isURL;
+        return resourceType;
     }
 
     public boolean isReadOnly() {
 
-        if(!isURL) {
+        File file = new File(location);
+        if(file.exists() && file.canWrite()) return readOnly;
 
-            File file = new File(location);
-            if(file.exists() && file.canWrite()) return readOnly;
-        }
-
-        return isURL || readOnly;
+        return readOnly;
     }
 
     public void setReadOnly(boolean readOnly) {
@@ -61,7 +56,7 @@ public class Resource {
     public void setReadOnly(boolean readOnly, boolean forceFileReadOnly) {
 
         this.readOnly = readOnly;
-        if(forceFileReadOnly && !isURL) {
+        if(forceFileReadOnly) {
 
             File file = new File(location);
             file.setReadOnly();
