@@ -80,13 +80,6 @@
             <version>1.21.0</version>
         </dependency>
 
-        <!-- JCommander Library -->
-        <dependency>
-            <groupId>com.beust</groupId>
-            <artifactId>jcommander</artifactId>
-            <version>1.48</version>
-        </dependency>
-
         <!-- 7zip-JBindings Library -->
         <dependency>
             <groupId>net.sf.sevenzipjbinding</groupId>
