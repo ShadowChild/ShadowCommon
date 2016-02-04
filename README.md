@@ -25,16 +25,18 @@ Below is how you would implement this project into either maven or gradle
 </properties>
 
 <dependenies>
-  <dependancy>
+  <dependency>
     <groupId>io.github.shadowchild</groupId>
     <artifactId>common-core</artifactId>
     <version>${cybernize.version}</version>
   </dependency>
-  <groupId>io.github.shadowchild</groupId>
+  <dependency>
+    <groupId>io.github.shadowchild</groupId>
     <artifactId>common-opengl</artifactId>
     <version>${cybernize.version}</version>
   </dependency>
-  <groupId>io.github.shadowchild</groupId>
+  <dependency>
+    <groupId>io.github.shadowchild</groupId>
     <artifactId>common-graphics</artifactId>
     <version>${cybernize.version}</version>
   </dependency>
