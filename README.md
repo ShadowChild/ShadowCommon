@@ -24,7 +24,7 @@ Below is how you would implement this project into either maven or gradle
         <cynbernize.version>1.0-SNAPSHOT</cynbernize.version>
 </properties>
 
-<dependenies>
+<dependencies>
   <dependency>
     <groupId>io.github.shadowchild</groupId>
     <artifactId>common-core</artifactId>
@@ -43,6 +43,7 @@ Below is how you would implement this project into either maven or gradle
 </dependencies>
 ```
 
+## Gradle
 ```groovy
 repositories {
     mavenLocal()
