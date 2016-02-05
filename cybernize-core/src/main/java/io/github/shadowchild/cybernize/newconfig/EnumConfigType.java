@@ -1,4 +1,4 @@
-package io.github.shadowchild.common.newconfig;
+package io.github.shadowchild.cybernize.newconfig;
 
 /**
  * Created by Zach Piddock on 31/12/2015.

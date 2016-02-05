@@ -1,5 +1,5 @@
-import io.github.shadowchild.common.config.Config;
-import io.github.shadowchild.common.config.Configuration;
+import io.github.shadowchild.cybernize.config.Config;
+import io.github.shadowchild.cybernize.config.Configuration;
 
 /**
  * Created by Zach Piddock on 07/11/2015.

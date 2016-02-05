@@ -1,7 +1,7 @@
-package io.github.shadowchild.common.newconfig;
+package io.github.shadowchild.cybernize.newconfig;
 
 
-import io.github.shadowchild.common.util.Resource;
+import io.github.shadowchild.cybernize.util.Resource;
 
 /**
  * Created by Zach Piddock on 03/01/2016.

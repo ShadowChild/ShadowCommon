@@ -1,5 +1,5 @@
-import io.github.shadowchild.common.util.MathUtils;
-import io.github.shadowchild.common.util.Utils;
+import io.github.shadowchild.cybernize.util.MathUtils;
+import io.github.shadowchild.cybernize.util.Utils;
 import org.apache.commons.math3.util.Pair;
 
 import java.io.IOException;

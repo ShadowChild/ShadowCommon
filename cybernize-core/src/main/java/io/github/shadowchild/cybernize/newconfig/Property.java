@@ -1,4 +1,4 @@
-package io.github.shadowchild.common.newconfig;
+package io.github.shadowchild.cybernize.newconfig;
 
 
 import java.util.List;

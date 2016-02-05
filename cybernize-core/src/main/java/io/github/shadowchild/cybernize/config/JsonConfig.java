@@ -1,4 +1,4 @@
-package io.github.shadowchild.common.config;
+package io.github.shadowchild.cybernize.config;
 
 
 import com.google.gson.Gson;

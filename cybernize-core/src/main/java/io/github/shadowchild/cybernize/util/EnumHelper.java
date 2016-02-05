@@ -1,7 +1,7 @@
-package io.github.shadowchild.common.util;
+package io.github.shadowchild.cybernize.util;
 
 
-import io.github.shadowchild.common.newconfig.EnumConfigType;
+import io.github.shadowchild.cybernize.newconfig.EnumConfigType;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;

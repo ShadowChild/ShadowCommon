@@ -1,4 +1,4 @@
-package io.github.shadowchild.common.zip;
+package io.github.shadowchild.cybernize.zip;
 
 
 import java.io.File;

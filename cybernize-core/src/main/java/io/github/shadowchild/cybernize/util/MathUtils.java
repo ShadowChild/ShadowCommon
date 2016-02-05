@@ -1,4 +1,4 @@
-package io.github.shadowchild.common.util;
+package io.github.shadowchild.cybernize.util;
 
 
 import org.apache.commons.math3.util.Pair;

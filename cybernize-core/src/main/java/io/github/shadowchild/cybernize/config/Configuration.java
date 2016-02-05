@@ -1,4 +1,4 @@
-package io.github.shadowchild.common.config;
+package io.github.shadowchild.cybernize.config;
 
 
 import java.lang.reflect.Constructor;

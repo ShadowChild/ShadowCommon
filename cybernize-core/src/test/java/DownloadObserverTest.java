@@ -1,5 +1,5 @@
-import io.github.shadowchild.common.util.Download;
-import io.github.shadowchild.common.util.Utils;
+import io.github.shadowchild.cybernize.util.Download;
+import io.github.shadowchild.cybernize.util.Utils;
 
 import javax.swing.*;
 import java.awt.*;
