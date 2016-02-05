@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.shadowchild</groupId>
-    <artifactId>common-parent</artifactId>
+    <artifactId>cybernize-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>common-core</module>
-        <module>common-opengl</module>
-        <module>common-graphics</module>
+        <module>cybernize-core</module>
+        <module>cybernize-opengl</module>
+        <module>cybernize-graphics</module>
     </modules>
 
     <!-- Sets the properties, specifically the java bytecode version -->
