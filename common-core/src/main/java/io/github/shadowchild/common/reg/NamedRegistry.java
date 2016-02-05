@@ -26,5 +26,14 @@ public class NamedRegistry<T> {
         }
     }
 
+    public T getObject(String name) {
+
+        if(registry.containsKey(name)) {
+
+            return registry.get(name);
+        }
+        return null;
+    }
+
     public static final int SUCCESS = 0, KEY_REGISTERED = 1, VALUE_REGISTERED = 2;
 }
