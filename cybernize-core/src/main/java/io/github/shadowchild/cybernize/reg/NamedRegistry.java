@@ -8,8 +8,8 @@ import java.util.Map;
  * Created by Zach Piddock on 16/01/2016.
  */
 public class NamedRegistry<T> {
-	
-	private boolean ignoreValue;
+
+    private boolean ignoreValue;
 
     public Map<String, T> registry = new HashMap<>();
 
@@ -27,10 +27,10 @@ public class NamedRegistry<T> {
             return SUCCESS;
         }
     }
-    
+
     public void remove(String name) {
-    	
-    	registry.remove(name);
+
+        registry.remove(name);
     }
 
     public T getObject(String name) {
@@ -41,15 +41,15 @@ public class NamedRegistry<T> {
         }
         return null;
     }
-    
+
     public void clearRegistry() {
-    	
-    	registry.clear();
+
+        registry.clear();
     }
-    
+
     public void setIgnoreValueOnRegister(boolean ignoreValue) {
-    	
-    	this.ignoreValue = ignoreValue;
+
+        this.ignoreValue = ignoreValue;
     }
 
     public static final int SUCCESS = 0, KEY_REGISTERED = 1, VALUE_REGISTERED = 2;

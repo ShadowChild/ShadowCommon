@@ -1,9 +1,6 @@
 package io.github.shadowchild.cybernize.util;
 
 
-import net.sf.sevenzipjbinding.SevenZip;
-import net.sf.sevenzipjbinding.SevenZipNativeInitializationException;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -68,16 +65,9 @@ public class Utils {
         return fileName.substring(fileName.lastIndexOf('/') + 1);
     }
 
-    public static void initialise() {
-
-        try {
-
-            SevenZip.initSevenZipFromPlatformJAR();
-        } catch(SevenZipNativeInitializationException e) {
-
-            e.printStackTrace();
-        }
-    }
-
-    public static final boolean BUILT = Utils.class.getProtectionDomain().getCodeSource().getLocation().getPath().endsWith(".jar");
+    public static final boolean BUILT = Utils.class.getProtectionDomain()
+            .getCodeSource()
+            .getLocation()
+            .getPath()
+            .endsWith(".jar");
 }

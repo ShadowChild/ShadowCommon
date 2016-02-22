@@ -42,7 +42,7 @@ public class Resource {
 
     public boolean isReadOnly() {
 
-        File file = new File(location);
+        File file = toFile();
         if(file.exists() && file.canWrite()) return readOnly;
 
         return readOnly;
@@ -58,8 +58,12 @@ public class Resource {
         this.readOnly = readOnly;
         if(forceFileReadOnly) {
 
-            File file = new File(location);
-            file.setReadOnly();
+            toFile().setReadOnly();
         }
+    }
+
+    public File toFile() {
+
+        return new File(getLocation());
     }
 }

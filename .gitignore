@@ -17,3 +17,4 @@ target/
 *.project
 *.prefs
 *.classpath
+*.pom
