@@ -45,5 +45,3 @@ dependencies {
     compile "io.github.shadowchild:cybernize2:${cybernizeVersion}"
 }
 ```
-
-The `cybernize` dependency is required for any of the other projects you wish to use

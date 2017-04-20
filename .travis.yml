@@ -7,13 +7,3 @@ script: mvn install -DskipTests=true
 cache:
   directories:
     - $HOME/.m2
-
-deploy:
-  provider: releases
-  api_key: ""
-  file: 
-    - "ShadowCommon.jar"
-    - "Deps.jar"
-  skip_cleanup: true
-  on:
-    tags: true

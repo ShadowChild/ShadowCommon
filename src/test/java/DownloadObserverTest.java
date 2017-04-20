@@ -18,6 +18,7 @@ public class DownloadObserverTest extends JDialog {
 
     private JPanel contentPane;
     private JButton downloadButton;
+    private JLabel dataLabel;
     private JProgressBar progressBar1;
 
     private static DownloadObserverTest dialog;
@@ -68,7 +69,10 @@ public class DownloadObserverTest extends JDialog {
         contentPane.setLayout(new BorderLayout());
         progressBar1 = new JProgressBar();
         progressBar1.setStringPainted(true);
-        contentPane.add(progressBar1, BorderLayout.CENTER);
+        contentPane.add(progressBar1, BorderLayout.NORTH);
+        dataLabel = new JLabel("0 Bytes / 0 Bytes");
+        dataLabel.setHorizontalAlignment(JLabel.CENTER);
+        contentPane.add(dataLabel);
         downloadButton = new JButton();
         downloadButton.setText("Download");
         contentPane.add(downloadButton, BorderLayout.SOUTH);
