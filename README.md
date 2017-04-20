@@ -1,4 +1,4 @@
-# Cybernize [![Build Status](https://travis-ci.org/ShadowChild/Cybernize.svg?branch=master)](https://travis-ci.org/ShadowChild/Cybernize)
+# Cybernize [![Build Status](https://travis-ci.org/ShadowChild/Cybernize2.svg?branch=master)](https://travis-ci.org/ShadowChild/Cybernize2)
 A common library i'll be using for my projects
 
 To install for use in other projects, run the following
@@ -27,17 +27,7 @@ Below is how you would implement this project into either maven or gradle
 <dependencies>
   <dependency>
     <groupId>io.github.shadowchild</groupId>
-    <artifactId>common-core</artifactId>
-    <version>${cybernize.version}</version>
-  </dependency>
-  <dependency>
-    <groupId>io.github.shadowchild</groupId>
-    <artifactId>common-opengl</artifactId>
-    <version>${cybernize.version}</version>
-  </dependency>
-  <dependency>
-    <groupId>io.github.shadowchild</groupId>
-    <artifactId>common-graphics</artifactId>
+    <artifactId>cybernize2</artifactId>
     <version>${cybernize.version}</version>
   </dependency>
 </dependencies>
@@ -52,10 +42,8 @@ repositories {
 project.ext.cybernizeVersion = "1.0-SNAPSHOT"
 
 dependencies {
-    compile "io.github.shadowchild:common-core:${cybernizeVersion}"
-    compile "io.github.shadowchild:common-opengl:${cybernizeVersion}"
-    compile "io.github.shadowchild:common-graphics:${cybernizeVersion}"
+    compile "io.github.shadowchild:cybernize2:${cybernizeVersion}"
 }
 ```
 
-The `common-core` dependency is required for any of the other projects you wish to use
+The `cybernize` dependency is required for any of the other projects you wish to use
