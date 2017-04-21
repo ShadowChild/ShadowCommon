@@ -1,4 +1,5 @@
 import io.github.shadowchild.cybernize.util.Download;
+import io.github.shadowchild.cybernize.util.MathUtils;
 import io.github.shadowchild.cybernize.util.Utils;
 
 import javax.swing.*;
@@ -60,6 +61,7 @@ public class DownloadObserverTest extends JDialog {
     }
 
     {
+    	// ensures the components have been initialised
         setupUI();
     }
 
@@ -70,7 +72,7 @@ public class DownloadObserverTest extends JDialog {
         progressBar1 = new JProgressBar();
         progressBar1.setStringPainted(true);
         contentPane.add(progressBar1, BorderLayout.NORTH);
-        dataLabel = new JLabel("0 Bytes / 0 Bytes");
+        dataLabel = new JLabel("[0 B] / [0 B]");
         dataLabel.setHorizontalAlignment(JLabel.CENTER);
         contentPane.add(dataLabel);
         downloadButton = new JButton();
@@ -89,6 +91,7 @@ public class DownloadObserverTest extends JDialog {
                 case Download.DOWNLOADING: {
 
                     dialog.progressBar1.setValue((int)download.getProgress());
+                    dialog.dataLabel.setText(getByteProgress(download));
                     break;
                 }
                 case Download.COMPLETE: {
@@ -103,9 +106,17 @@ public class DownloadObserverTest extends JDialog {
 
         dispose();
     }
+    
+    private String getByteProgress(Download download) {
+    	
+    	return MathUtils.humanReadableByteCount(download.getDownloaded()) + " / " 
+    			+ MathUtils.humanReadableByteCount(download.getSize());
+    }
 
+    // Entry Point
     public static void main(String... args) {
 
+    	// Initialise the test
         DownloadObserverTest dialog = new DownloadObserverTest();
         dialog.setTitle("Download Test");
         dialog.pack();

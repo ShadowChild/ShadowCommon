@@ -66,6 +66,11 @@ public class Download extends Observable implements Runnable {
 
         return size;
     }
+    
+    public int getDownloaded() {
+    	
+    	return downloaded;
+    }
 
     // Get this download's progress.
     public float getProgress() {
