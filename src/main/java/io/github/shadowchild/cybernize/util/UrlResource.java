@@ -13,15 +13,17 @@ public class UrlResource extends Resource {
     }
 
     @Override
-    public void setReadOnly(boolean readOnly, boolean forceFileReadOnly) {
+    public boolean setReadOnly(boolean readOnly, boolean forceFileReadOnly) {
 
-        // Do not do anything, you can't change a url resource
+        // return true as a URL is always read only
+        return true;
     }
 
     @Override
-    public void setReadOnly(boolean readOnly) {
+    public boolean setReadOnly(boolean readOnly) {
 
-        // Do not do anything, you can't change a url resource
+        // return true as a URL is always read only
+        return true;
     }
 
     @Override
