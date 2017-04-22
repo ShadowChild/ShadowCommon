@@ -1,8 +1,6 @@
 package io.github.shadowchild.cybernize.util;
 
 
-import io.github.shadowchild.cybernize.newconfig.EnumConfigType;
-
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

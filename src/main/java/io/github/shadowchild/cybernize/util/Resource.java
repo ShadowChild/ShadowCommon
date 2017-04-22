@@ -14,6 +14,11 @@ public class Resource {
 
     public Resource(String resource) {
 
+        this(resource, "/assets/");
+    }
+
+    public Resource(String resource, String parentDir) {
+
         String resourceType;
         String location;
 
@@ -23,11 +28,12 @@ public class Resource {
             location = resource.substring(resource.indexOf(":") + 1);
         } else {
 
-            resourceType = "textures";
+            // Set default resource type, sets to parentDir
+            resourceType = "";
             location = resource;
         }
         this.resourceType = resourceType;
-        this.location = "/assets/" + resourceType + "/" + location;
+        this.location = parentDir + resourceType + "/" + location;
     }
 
     public String getLocation() {
@@ -48,18 +54,19 @@ public class Resource {
         return readOnly;
     }
 
-    public void setReadOnly(boolean readOnly) {
+    public boolean setReadOnly(boolean readOnly) {
 
-        setReadOnly(readOnly, false);
+        return setReadOnly(readOnly, false);
     }
 
-    public void setReadOnly(boolean readOnly, boolean forceFileReadOnly) {
+    public boolean setReadOnly(boolean readOnly, boolean forceFileReadOnly) {
 
         this.readOnly = readOnly;
         if(forceFileReadOnly) {
 
-            toFile().setReadOnly();
+            return toFile().setReadOnly();
         }
+        return this.readOnly;
     }
 
     public File toFile() {

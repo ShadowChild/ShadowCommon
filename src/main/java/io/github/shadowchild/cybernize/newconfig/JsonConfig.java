@@ -1,14 +1,21 @@
 package io.github.shadowchild.cybernize.newconfig;
 
 
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 import io.github.shadowchild.cybernize.util.Resource;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Created by Zach Piddock on 03/01/2016.
  */
 public class JsonConfig extends Config {
 
-    public JsonConfig(Resource location, EnumConfigType type) {
+    public JsonConfig(Resource location, Type type) {
 
         super(location, type);
     }
@@ -17,5 +24,60 @@ public class JsonConfig extends Config {
     public String parseSection(String section) {
 
         return null;
+    }
+
+    @Override
+    public Object createFile(File file) {
+
+        try {
+
+            return initConfig(file);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        JsonObject obj = new JsonObject();
+        writeToDisk(file, obj);
+        return obj;
+    }
+
+    @Override
+    public Object initConfig(File file) throws IOException {
+
+        JsonObject object;
+
+        if(file.exists()) {
+
+            FileReader fr = new FileReader(file);
+            JsonReader jr = new JsonReader(fr);
+
+            JsonParser jp = new JsonParser();
+            JsonElement element = jp.parse(jr);
+
+            object = element.getAsJsonObject();
+        } else {
+
+            object = new JsonObject();
+        }
+
+        writeToDisk(file, object);
+        return object;
+    }
+
+    private void writeToDisk(File file, JsonObject toWrite) {
+
+        try {
+
+            GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
+            Gson gson = builder.create();
+            String output = gson.toJson(toWrite);
+
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(output.getBytes());
+            fos.close();
+        } catch(IOException e) {
+
+            e.printStackTrace();
+        }
     }
 }
