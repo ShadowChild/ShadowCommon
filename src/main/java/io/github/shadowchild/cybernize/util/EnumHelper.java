@@ -1,11 +1,9 @@
 package io.github.shadowchild.cybernize.util;
 
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import io.github.shadowchild.cybernize.newconfig.Property;
+
+import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +21,7 @@ public class EnumHelper {
     private static boolean isSetup = false;
 
     //Some enums are decompiled with extra arguments, so lets check for that
-    @SuppressWarnings("rawtypes") private static Class[][] commonTypes = { { EnumConfigType.class, Class.class } };
+    @SuppressWarnings("rawtypes") private static Class[][] commonTypes = { { Property.Type.class, Class.class } };
 
     private static void setup() {
 
