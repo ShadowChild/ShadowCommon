@@ -12,9 +12,9 @@ import java.io.IOException;
  */
 public class IniConfig extends Config {
 
-    public IniConfig(Resource location, Type type) {
+    public IniConfig(Resource location) {
 
-        super(location, type);
+        super(location, Type.INI);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class IniConfig extends Config {
     }
 
     @Override
-    public Object createFile(File file) {
+    protected Object createFile(File file) {
 
         Ini ini = new Ini();
         ini.setFile(file);
@@ -32,7 +32,7 @@ public class IniConfig extends Config {
     }
 
     @Override
-    public Object initConfig(File obj) throws IOException {
+    protected Object initConfig(File obj) throws IOException {
 
         ((Ini)config).load();
         return config;

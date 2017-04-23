@@ -17,8 +17,7 @@ public abstract class Config {
 
     protected Object config;
 
-
-    public Config(Resource location, Type type) {
+    protected Config(Resource location, Type type) {
 
         this.location = location;
         this.type = type;
@@ -45,7 +44,7 @@ public abstract class Config {
             }
         } else {
 
-            Object obj = createFile(file);
+            config = createFile(file);
 
             try {
 
@@ -96,9 +95,9 @@ public abstract class Config {
      * @param file
      * @return
      */
-    public abstract Object createFile(File file);
+    protected abstract Object createFile(File file);
 
-    public abstract Object initConfig(File file) throws IOException;
+    protected abstract Object initConfig(File file) throws IOException;
 
     public enum Type {
 

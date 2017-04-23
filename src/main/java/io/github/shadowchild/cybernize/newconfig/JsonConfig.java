@@ -15,9 +15,9 @@ import java.io.IOException;
  */
 public class JsonConfig extends Config {
 
-    public JsonConfig(Resource location, Type type) {
+    public JsonConfig(Resource location) {
 
-        super(location, type);
+        super(location, Type.JSON);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class JsonConfig extends Config {
     }
 
     @Override
-    public Object createFile(File file) {
+    protected Object createFile(File file) {
 
         try {
 
@@ -42,9 +42,10 @@ public class JsonConfig extends Config {
     }
 
     @Override
-    public Object initConfig(File file) throws IOException {
+    protected Object initConfig(File file) throws IOException {
 
-        JsonObject object;
+        JsonObject object = new JsonObject();
+        writeToDisk(file, object);
 
         if(file.exists()) {
 

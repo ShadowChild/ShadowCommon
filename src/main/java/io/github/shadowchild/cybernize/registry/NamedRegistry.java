@@ -1,4 +1,4 @@
-package io.github.shadowchild.cybernize.reg;
+package io.github.shadowchild.cybernize.registry;
 
 
 import java.util.HashMap;

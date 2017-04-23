@@ -14,7 +14,7 @@ public class Resource {
 
     public Resource(String resource) {
 
-        this(resource, "/assets/");
+        this(resource, "");
     }
 
     public Resource(String resource, String parentDir) {
@@ -71,6 +71,6 @@ public class Resource {
 
     public File toFile() {
 
-        return new File(getLocation());
+        return new File(".", getLocation());
     }
 }
