@@ -6,11 +6,11 @@ package io.github.shadowchild.cybernize.util;
  */
 public interface IParser<T> {
 
-    default void parseMultiple(T... parseable) {
+    default void parseMultiple(T... parsable) {
 
-        for(T p : parseable)
+        for(T p : parsable)
             parse(p);
     }
 
-    void parse(T parseable);
+    void parse(T parsable);
 }
