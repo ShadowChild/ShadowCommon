@@ -1,6 +1,7 @@
 package io.github.shadowchild.cybernize.newconfig;
 
 
+import io.github.shadowchild.cybernize.newconfig.property.Property;
 import io.github.shadowchild.cybernize.util.Resource;
 import org.apache.commons.io.FileUtils;
 
@@ -69,17 +70,17 @@ public abstract class Config {
         }
     }
 
-    public Property get(Property.Type type, String section, String propertyName, Object defaultValue) {
+    public <T> Property get(T type, String section, String propertyName, T defaultValue) {
 
         return get(type, section, propertyName, defaultValue, null);
     }
 
-    public Property get(Property.Type type, String section, String propertyName, Object defaultValue, String comment) {
+    public <T> Property get(T type, String section, String propertyName, T defaultValue, String comment) {
 
         boolean _comment = comment != null;
         String _section = parseSection(section);
 
-        return null;
+        return new Property<T>(defaultValue);
     }
 
     /**
