@@ -1,4 +1,4 @@
-package io.github.shadowchild.cybernize.newconfig.property;
+package io.github.shadowchild.cybernize.config.property;
 
 import java.util.ArrayList;
 import java.util.List;

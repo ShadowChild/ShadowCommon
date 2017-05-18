@@ -1,12 +1,12 @@
 package io.github.shadowchild.cybernize.util;
 
 
-import io.github.shadowchild.cybernize.newconfig.Config;
-
 import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import io.github.shadowchild.cybernize.config.Config;
 
 /**
  * Created by Zach Piddock on 31/12/2015.
