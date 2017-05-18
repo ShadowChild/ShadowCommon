@@ -1,6 +1,7 @@
 package io.github.shadowchild.cybernize.newconfig;
 
 
+import io.github.shadowchild.cybernize.newconfig.property.Property;
 import io.github.shadowchild.cybernize.util.Resource;
 import org.ini4j.Ini;
 
@@ -18,9 +19,13 @@ public class IniConfig extends Config {
     }
 
     @Override
-    public String parseSection(String section) {
+    public void handleSection(String section) {
 
-        return null;
+        Ini ini = (Ini)config;
+        if(!ini.containsKey(section)) {
+        	
+        	ini.add(section);
+        }
     }
 
     @Override
@@ -37,4 +42,46 @@ public class IniConfig extends Config {
         ((Ini)config).load();
         return config;
     }
+
+	@Override
+	public <T> Property get(String section, String propertyName, T defaultValue, String comment) {
+		
+		Property<T> property = new Property<>(defaultValue);
+		property.addComment(comment);
+		
+		Ini ini = (Ini)config;
+		if(!ini.containsKey(section)) {
+			
+			ini.add(section);
+		}
+		Ini.Section _section = ini.get(section);
+		
+		if(comment != null && !comment.isEmpty()) {
+
+            _section.putComment(propertyName, " " + comment);
+            storeIni(ini);
+		}
+		
+		if(_section.containsKey(propertyName)) {
+			
+			Object ret = _section.fetch(propertyName);
+			property.setValue((T)ret);	
+		} else {
+			
+			_section.add(propertyName, defaultValue);
+			storeIni(ini);
+		}
+		return property;
+	}
+	
+	private void storeIni(Ini ini) {
+		
+		try {
+			
+			ini.store();
+		} catch(IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
 }

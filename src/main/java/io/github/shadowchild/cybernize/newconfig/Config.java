@@ -37,7 +37,9 @@ public abstract class Config {
 
                 file.createNewFile();
 
-                createFile(file);
+                config = createFile(file);
+
+                initConfig(file);
             } catch(IOException e) {
 
                 e.printStackTrace();
@@ -70,26 +72,19 @@ public abstract class Config {
         }
     }
 
-    public <T> Property get(T type, String section, String propertyName, T defaultValue) {
+    public <T> Property get(String section, String propertyName, T defaultValue) {
 
-        return get(type, section, propertyName, defaultValue, null);
+        return get(section, propertyName, defaultValue, null);
     }
 
-    public <T> Property get(T type, String section, String propertyName, T defaultValue, String comment) {
-
-        boolean _comment = comment != null;
-        String _section = parseSection(section);
-
-        return new Property<T>(defaultValue);
-    }
+    public abstract <T> Property get(String section, String propertyName, T defaultValue, String comment);
 
     /**
      * Parses the passed section and returns the section relevant to the config type
      *
      * @param section
-     * @return
      */
-    public abstract String parseSection(String section);
+    public abstract void handleSection(String section);
 
     /**
      * Creates the file and returns the Object that will handle the config

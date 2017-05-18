@@ -3,6 +3,8 @@ package io.github.shadowchild.cybernize.newconfig;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
+
+import io.github.shadowchild.cybernize.newconfig.property.Property;
 import io.github.shadowchild.cybernize.util.Resource;
 
 import java.io.File;
@@ -21,9 +23,8 @@ public class JsonConfig extends Config {
     }
 
     @Override
-    public String parseSection(String section) {
+    public void handleSection(String section) {
 
-        return null;
     }
 
     @Override
@@ -81,4 +82,10 @@ public class JsonConfig extends Config {
             e.printStackTrace();
         }
     }
+
+	@Override
+	public <T> Property get(String section, String propertyName, T defaultValue, String comment) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
