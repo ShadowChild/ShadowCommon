@@ -19,7 +19,7 @@ public class JsonConfig extends Config {
 
     public JsonConfig(Resource location) {
 
-        super(location, Type.JSON);
+        super(location, "JSON");
     }
 
     @Override

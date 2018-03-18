@@ -7,6 +7,8 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Zach Piddock on 31/12/2015.
@@ -14,11 +16,19 @@ import java.io.IOException;
 public abstract class Config {
 
     final Resource location;
-    final Type type;
+    final String type;
+
+    public static final Map<String, Class<? extends Config>> configTypeMap = new HashMap<>();
+
+    static {
+
+        configTypeMap.put("JSON", JsonConfig.class);
+        configTypeMap.put("INI", IniConfig.class);
+    }
 
     protected Object config;
 
-    protected Config(Resource location, Type type) {
+    protected Config(Resource location, String type) {
 
         this.location = location;
         this.type = type;
@@ -87,22 +97,4 @@ public abstract class Config {
     protected abstract Object createFile(File file);
 
     protected abstract Object initConfig(File file) throws IOException;
-
-    public enum Type {
-
-        JSON(JsonConfig.class),
-        INI(IniConfig.class);
-
-        private Class<? extends Config> clazz;
-
-        Type(Class<? extends Config> clazz) {
-
-            this.clazz = clazz;
-        }
-
-        public Class<? extends Config> getClazz() {
-
-            return clazz;
-        }
-    }
 }

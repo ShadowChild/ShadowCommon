@@ -15,7 +15,7 @@ public class IniConfig extends Config {
 
     public IniConfig(Resource location) {
 
-        super(location, Type.INI);
+        super(location, "INI");
     }
 
     @Override
