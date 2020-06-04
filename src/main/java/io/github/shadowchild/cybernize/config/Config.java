@@ -2,7 +2,7 @@ package io.github.shadowchild.cybernize.config;
 
 
 import io.github.shadowchild.cybernize.config.property.Property;
-import io.github.shadowchild.cybernize.util.Resource;
+import io.github.shadowchild.cybernize.resource.Resource;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

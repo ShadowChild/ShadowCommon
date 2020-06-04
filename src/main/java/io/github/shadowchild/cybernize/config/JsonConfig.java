@@ -5,7 +5,7 @@ import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
 import io.github.shadowchild.cybernize.config.property.Property;
-import io.github.shadowchild.cybernize.util.Resource;
+import io.github.shadowchild.cybernize.resource.Resource;
 
 import java.io.File;
 import java.io.FileOutputStream;
