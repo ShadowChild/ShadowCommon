@@ -11,7 +11,7 @@ public class NamedRegistry<T> {
 
     private boolean ignoreValue;
 
-    public Map<String, T> registry = new HashMap<>();
+    private final Map<String, T> registry = new HashMap<>();
 
     public int register(String name, T object) {
 
@@ -50,6 +50,11 @@ public class NamedRegistry<T> {
     public void setIgnoreValueOnRegister(boolean ignoreValue) {
 
         this.ignoreValue = ignoreValue;
+    }
+
+    public Map<String, T> getRegistry() {
+        
+        return registry;
     }
 
     public static final int SUCCESS = 0, KEY_REGISTERED = 1, VALUE_REGISTERED = 2;
