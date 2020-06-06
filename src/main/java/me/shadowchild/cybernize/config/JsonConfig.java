@@ -1,11 +1,11 @@
-package io.github.shadowchild.cybernize.config;
+package me.shadowchild.cybernize.config;
 
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
-import io.github.shadowchild.cybernize.config.property.Property;
-import io.github.shadowchild.cybernize.resource.Resource;
+import me.shadowchild.cybernize.config.property.Property;
+import me.shadowchild.cybernize.resource.Resource;
 
 import java.io.File;
 import java.io.FileOutputStream;

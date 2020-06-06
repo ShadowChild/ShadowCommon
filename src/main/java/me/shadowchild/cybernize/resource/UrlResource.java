@@ -1,4 +1,4 @@
-package io.github.shadowchild.cybernize.resource;
+package me.shadowchild.cybernize.resource;
 
 
 /**

@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'me.shadowchild.cybernize'
+//rootProject.name = 'Arcanine'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+
+    implementation "org.apache.commons:commons-lang3:3.10"
+    implementation "commons-io:commons-io:2.7"
+    implementation "org.apache.commons:commons-math3:3.6.1"
+
+    implementation "org.ini4j:ini4j:0.5.4"
+
+    implementation "com.google.guava:guava:29.0-jre"
+    implementation "com.google.code.gson:gson:2.8.6"
+}
+
+ext.sharedManifest = manifest {
+
+}
+
+jar {
+
+    manifest = project.manifest {
+        from sharedManifest
+    }
+}
+
+task uberJar(type: Jar) {
+
+    manifest = project.manifest {
+        from sharedManifest
+    }
+
+    dependsOn build
+
+    archiveClassifier = 'fat'
+
+    from sourceSets.main.output
+
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.findAll { it.name.endsWith('jar')}.collect { zipTree(it) }
+    }
+}

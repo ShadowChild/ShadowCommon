@@ -1,4 +1,9 @@
-import java.awt.BorderLayout;
+import me.shadowchild.cybernize.util.Download;
+import me.shadowchild.cybernize.util.MathUtils;
+import me.shadowchild.cybernize.util.Utils;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -8,19 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.KeyStroke;
-
-import io.github.shadowchild.cybernize.util.Download;
-import io.github.shadowchild.cybernize.util.MathUtils;
-import io.github.shadowchild.cybernize.util.Utils;
 
 public class MultiDownloadTest extends JDialog {
 

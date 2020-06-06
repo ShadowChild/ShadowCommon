@@ -1,8 +1,8 @@
-import io.github.shadowchild.cybernize.config.Config;
-import io.github.shadowchild.cybernize.config.IniConfig;
-import io.github.shadowchild.cybernize.config.JsonConfig;
-import io.github.shadowchild.cybernize.config.property.Property;
-import io.github.shadowchild.cybernize.resource.Resource;
+import me.shadowchild.cybernize.config.Config;
+import me.shadowchild.cybernize.config.IniConfig;
+import me.shadowchild.cybernize.config.JsonConfig;
+import me.shadowchild.cybernize.config.property.Property;
+import me.shadowchild.cybernize.resource.Resource;
 
 public class NewConfigTest {
 

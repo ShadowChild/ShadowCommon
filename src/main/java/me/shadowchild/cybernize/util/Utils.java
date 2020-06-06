@@ -1,4 +1,4 @@
-package io.github.shadowchild.cybernize.util;
+package me.shadowchild.cybernize.util;
 
 
 import java.io.File;

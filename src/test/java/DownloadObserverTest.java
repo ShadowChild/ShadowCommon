@@ -1,6 +1,6 @@
-import io.github.shadowchild.cybernize.util.Download;
-import io.github.shadowchild.cybernize.util.MathUtils;
-import io.github.shadowchild.cybernize.util.Utils;
+import me.shadowchild.cybernize.util.Download;
+import me.shadowchild.cybernize.util.MathUtils;
+import me.shadowchild.cybernize.util.Utils;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,8 +1,8 @@
-package io.github.shadowchild.cybernize.config;
+package me.shadowchild.cybernize.config;
 
 
-import io.github.shadowchild.cybernize.config.property.Property;
-import io.github.shadowchild.cybernize.resource.Resource;
+import me.shadowchild.cybernize.config.property.Property;
+import me.shadowchild.cybernize.resource.Resource;
 import org.ini4j.Ini;
 
 import java.io.File;
