@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
 }
 
 group 'me.shadowchild.cybernize'
@@ -26,32 +25,3 @@ dependencies {
     implementation "com.google.guava:guava:29.0-jre"
     implementation "com.google.code.gson:gson:2.8.6"
 }
-
-ext.sharedManifest = manifest {
-
-}
-
-jar {
-
-    manifest = project.manifest {
-        from sharedManifest
-    }
-}
-
-//task uberJar(type: Jar) {
-//
-//    manifest = project.manifest {
-//        from sharedManifest
-//    }
-//
-//    dependsOn build
-//
-//    archiveClassifier = 'fat'
-//
-//    from sourceSets.main.output
-//
-//    dependsOn configurations.runtimeClasspath
-//    from {
-//        configurations.runtimeClasspath.findAll { it.name.endsWith('jar')}.collect { zipTree(it) }
-//    }
-//}
