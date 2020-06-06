@@ -38,20 +38,20 @@ jar {
     }
 }
 
-task uberJar(type: Jar) {
-
-    manifest = project.manifest {
-        from sharedManifest
-    }
-
-    dependsOn build
-
-    archiveClassifier = 'fat'
-
-    from sourceSets.main.output
-
-    dependsOn configurations.runtimeClasspath
-    from {
-        configurations.runtimeClasspath.findAll { it.name.endsWith('jar')}.collect { zipTree(it) }
-    }
-}
+//task uberJar(type: Jar) {
+//
+//    manifest = project.manifest {
+//        from sharedManifest
+//    }
+//
+//    dependsOn build
+//
+//    archiveClassifier = 'fat'
+//
+//    from sourceSets.main.output
+//
+//    dependsOn configurations.runtimeClasspath
+//    from {
+//        configurations.runtimeClasspath.findAll { it.name.endsWith('jar')}.collect { zipTree(it) }
+//    }
+//}
