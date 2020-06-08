@@ -57,5 +57,12 @@ public class NamedRegistry<T> {
         return registry;
     }
 
+    public Map<String, T> clone() {
+
+        Map<String, T> map = new HashMap<>(registry);
+
+        return map;
+    }
+
     public static final int SUCCESS = 0, KEY_REGISTERED = 1, VALUE_REGISTERED = 2;
 }
