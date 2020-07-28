@@ -1,10 +1,7 @@
 package me.shadowchild.cybernize.zip;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -70,5 +67,18 @@ public class ZipUtils {
         } catch(IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static boolean isZip(File file) {
+
+        int fileSignature = 0;
+        try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
+
+            fileSignature = raf.readInt();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        return fileSignature == 0x504B0304 || fileSignature == 0x504B0506 || fileSignature == 0x504B0708;
     }
 }
