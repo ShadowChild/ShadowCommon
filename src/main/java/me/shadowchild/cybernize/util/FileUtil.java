@@ -33,6 +33,7 @@ public class FileUtil {
                 fs = FileSystems.newFileSystem(uri, Collections.emptyMap());
             } catch(FileSystemAlreadyExistsException e) {
                 
+                System.out.println("File system exists already? Fallback on getFileSystem");
                 fs = FileSystems.getFileSystem(uri);
                 e.printStackTrace();
             }
