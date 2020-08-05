@@ -26,7 +26,15 @@ public class FileUtil {
         if(uri.getScheme().equals("jar")) {
 
             // Internal
-            FileSystem fs = FileSystems.newFileSystem(uri, Collections.emptyMap());
+            FileSystem fs;
+            try {
+
+                fs = FileSystems.newFileSystem(uri, Collections.emptyMap());
+            } catch(FileSystemAlreadyExistsException e) {
+                
+                fs = FileSystems.getFileSystem(uri);
+                e.printStackTrace();
+            }
             path = fs.getPath(resource);
         } else {
 
