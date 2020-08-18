@@ -1,4 +1,4 @@
-# Cybernize [![Build Status](https://travis-ci.org/ShadowChild/Cybernize2.svg?branch=master)](https://travis-ci.org/ShadowChild/Cybernize2)
+# Cybernize [![Build Status](https://travis-ci.org/ShadowChild/Cybernize2.svg?branch=master)](https://travis-ci.org/ShadowChild/Cybernize2)[ ![Download](https://api.bintray.com/packages/candor/cybernize/cybernize/images/download.svg) ](https://bintray.com/candor/cybernize/cybernize/_latestVersion)
 A common library i'll be using for my projects
 
 To implement this into your project, you have two choices, either though adding a jar as a dependancy, or by using a dependency management system. It is recommended that you use a dependency management system such as Maven, or Gradle as this can greatly help with the deployment of your programs, and/or when others try to contribute to your project.
