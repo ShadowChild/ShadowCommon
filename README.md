@@ -9,6 +9,7 @@ Below is how you would implement this project into either maven or gradle
 ```xml
 <repositories>
         <repository>
+                <id>bintray1</id>
                 <name>Cybernize repo</name>
                 <url>https://dl.bintray.com/candor/cybernize</url>
         </repository>
