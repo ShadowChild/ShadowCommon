@@ -71,7 +71,7 @@ publishing {
             artifact javadocJar
             groupId 'me.shadowchild.cybernize'
             artifactId 'cybernize'
-            version "${project.version}"
+            version '1.0'
         }
     }
 }
@@ -96,7 +96,7 @@ bintray {
         licenses = ['MIT']
         version {
 
-            name = "${project.version}"
+            name = '1.0'
             desc = 'Initial Release'
             released = new Date()
         }
