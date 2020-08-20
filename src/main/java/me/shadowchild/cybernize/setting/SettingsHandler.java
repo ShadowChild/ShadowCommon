@@ -112,9 +112,29 @@ public class SettingsHandler {
 
     public static void addRuntimeHook() {
 
-        System.out.println("CYBERNIZE: Flushing Settings to disk for shutdown...");
+        Runtime.getRuntime().addShutdownHook(new ShutdownHook());
+    }
 
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+    private static boolean checkHasConfig(Class clazz) {
+
+        for(Method method : clazz.getDeclaredMethods()) {
+
+            if(method.isAnnotationPresent(Config.class)) return true;
+        }
+        return false;
+    }
+
+    private static void saveValueToConfig(CommentedFileConfig cfg, String name, Object value) {
+
+        cfg.set(name, value);
+    }
+
+    public static class ShutdownHook extends Thread {
+
+        @Override
+        public void run() {
+
+            System.out.println("CYBERNIZE: Flushing Settings to disk for shutdown...");
 
             CONFIG_MAP.forEach((clazz, cfg) -> {
 
@@ -132,36 +152,22 @@ public class SettingsHandler {
                             String settingName = setting.category() + "." + field.getName();
                             Object val = field.get(clazz);
 
-                            // Attempt to get the value from the cfg file, else load the default value
-                            Object newValue = cfg.getOrElse(settingName, val);
-                            saveValueToConfig(cfg, settingName, newValue);
+
+                            saveValueToConfig(cfg, settingName, val);
                             // Attempt to write a comment
                             if (field.isAnnotationPresent(Setting.Comment.class))
                                 cfg.setComment(settingName, field.getAnnotation(Setting.Comment.class).value());
-                            field.set(clazz, newValue);
+//                            field.set(clazz, newValue);
                         }
                     }
                 } catch (IllegalAccessException e) {
+
                     e.printStackTrace();
                 }
 
                 cfg.save();
                 cfg.close();
             });
-        }));
-    }
-
-    private static boolean checkHasConfig(Class clazz) {
-
-        for(Method method : clazz.getDeclaredMethods()) {
-
-            if(method.isAnnotationPresent(Config.class)) return true;
         }
-        return false;
-    }
-
-    private static void saveValueToConfig(CommentedFileConfig cfg, String name, Object value) {
-
-        cfg.set(name, value);
     }
 }

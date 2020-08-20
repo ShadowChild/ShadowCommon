@@ -19,6 +19,9 @@ public class SettingTest {
     @Setting(category = "core")
     public static int y = 1;
 
+    @Setting(category = "core")
+    public static String test = "";
+
     static {
 
         // Initialise the settings handler as soon as possible and load config asap
@@ -56,5 +59,10 @@ public class SettingTest {
         // Settings Setup
 
         System.out.println(x + " " + y);
+        System.out.println(test);
+
+        x = 87;
+
+        test = "Not a test";
     }
 }
