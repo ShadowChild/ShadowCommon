@@ -1,6 +1,9 @@
 package me.shadowchild.cybernize.zip;
 
 
+import net.sf.sevenzipjbinding.SevenZip;
+import net.sf.sevenzipjbinding.SevenZipNativeInitializationException;
+
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -80,5 +83,17 @@ public class ZipUtils {
             e.printStackTrace();
         }
         return fileSignature == 0x504B0304 || fileSignature == 0x504B0506 || fileSignature == 0x504B0708;
+    }
+
+    public static void setUpSevenZip() {
+
+        try {
+
+            SevenZip.initSevenZipFromPlatformJAR();
+            System.out.println("CYBERNIZE: 7Zip-JBinding is initialised");
+        } catch (SevenZipNativeInitializationException e) {
+
+            e.printStackTrace();
+        }
     }
 }

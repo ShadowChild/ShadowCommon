@@ -1,0 +1,8 @@
+This archive management will initially support extracting the following formats: ZIP, 7Zip, RAR, RAR5
+
+Flow of the scheme:
+    create a new ArchiveBuilder instance
+    set the file to extract
+    set optional output directory
+    set optional archive type - if not set the builder will determine which archive type it is
+    call extract method

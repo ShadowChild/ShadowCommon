@@ -16,6 +16,8 @@ sourceCompatibility = 14
 group 'me.shadowchild.cybernize'
 version '1.0-SNAPSHOT'
 
+project.ext.sevenZipVersion = "16.02-2.01"
+
 repositories {
 
     jcenter()
@@ -39,6 +41,9 @@ dependencies {
 
     implementation "com.electronwill.night-config:core:3.6.3"
     implementation "com.electronwill.night-config:toml:3.6.3"
+
+    implementation "net.sf.sevenzipjbinding:sevenzipjbinding:${project.ext.sevenZipVersion}"
+    implementation "net.sf.sevenzipjbinding:sevenzipjbinding-all-platforms:${project.ext.sevenZipVersion}"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
