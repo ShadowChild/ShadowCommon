@@ -85,7 +85,8 @@ public class ArchiveBuilder {
      */
     private ArchiveType getTypeFromArchive() {
 
-        return ArchiveType.ZIP;
+        // TODO: check header of file to determine type, for now we use SevenZip for best compatibility
+        return ArchiveType.SEVEN_ZIP;
     }
 
     public enum ArchiveType {

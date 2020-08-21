@@ -3,6 +3,7 @@ package me.shadowchild.cybernize.archive;
 import me.shadowchild.cybernize.archive.extractor.ArchiveExtractor;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Archive {
 
@@ -19,5 +20,12 @@ public class Archive {
         this.outputDirectory = outputDirectory;
         this.type = type;
         this.extractor = extractor;
+    }
+
+    public boolean extract() throws IOException {
+
+        if(extractor.validate(this))
+            return extractor.extract(this);
+        else return false;
     }
 }

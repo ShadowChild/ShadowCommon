@@ -2,17 +2,12 @@ package me.shadowchild.cybernize.archive.extractor;
 
 import me.shadowchild.cybernize.archive.Archive;
 
-public class RarExtractor extends ArchiveExtractor {
+public class RarExtractor extends SevenZipExtractor {
 
     @Override
     public boolean validate(Archive archive) {
 
-        return false;
-    }
-
-    @Override
-    public boolean extract(Archive archive) {
-
-        return false;
+        // TODO: Validate the archive is in fact an old rar-14 format
+        return true;
     }
 }

@@ -90,6 +90,7 @@ public class ZipUtils {
         try {
 
             SevenZip.initSevenZipFromPlatformJAR();
+            System.out.printf("CYBERNIZE: 7zip Version: %s%n", SevenZip.getSevenZipVersion().version);
             System.out.println("CYBERNIZE: 7Zip-JBinding is initialised");
         } catch (SevenZipNativeInitializationException e) {
 
