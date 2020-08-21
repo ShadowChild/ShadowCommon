@@ -11,6 +11,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SevenZipExtractor extends ArchiveExtractor {
 
@@ -103,6 +105,38 @@ public class SevenZipExtractor extends ArchiveExtractor {
         }
 
         return successful;
+    }
+
+    @Override
+    public Set<String> getAllArchiveItems(Archive archive) throws IOException {
+
+        Set<String> set = new HashSet<>();
+
+        RandomAccessFile randomAccessFile = null;
+        IInArchive inArchive = null;
+
+        randomAccessFile = new RandomAccessFile(archive.archive, "r");
+        inArchive = SevenZip.openInArchive(null, new RandomAccessFileInStream(randomAccessFile));
+
+        System.out.printf("CYBERNIZE: There are %d items in the archive %s%n", inArchive.getNumberOfItems(), archive.archive.getName());
+
+        ISimpleInArchive simpleInArchive = inArchive.getSimpleInterface();
+
+        Arrays.stream(simpleInArchive.getArchiveItems()).iterator().forEachRemaining(item -> {
+
+            try {
+
+                set.add(item.getPath());
+            } catch (SevenZipException e) {
+
+                e.printStackTrace();
+            }
+        });
+
+        randomAccessFile.close();
+        inArchive.close();
+
+        return set;
     }
 
     private void writeToFile(String fileName, String parentFile, byte[] data) throws IOException {

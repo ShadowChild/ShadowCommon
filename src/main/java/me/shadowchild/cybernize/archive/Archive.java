@@ -4,6 +4,7 @@ import me.shadowchild.cybernize.archive.extractor.ArchiveExtractor;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 public class Archive {
 
@@ -27,5 +28,10 @@ public class Archive {
         if(extractor.validate(this))
             return extractor.extract(this);
         else return false;
+    }
+
+    public Set<String> getAllArchiveItems() throws IOException {
+
+        return extractor.getAllArchiveItems(this);
     }
 }

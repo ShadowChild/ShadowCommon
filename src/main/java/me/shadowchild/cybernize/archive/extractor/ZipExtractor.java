@@ -3,7 +3,10 @@ package me.shadowchild.cybernize.archive.extractor;
 import me.shadowchild.cybernize.archive.Archive;
 
 import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 public class ZipExtractor extends ArchiveExtractor {
@@ -71,5 +74,19 @@ public class ZipExtractor extends ArchiveExtractor {
 
         System.out.printf("CYBERNIZE: Finished extracting file %s%n", archive.archive.getName());
         return true;
+    }
+
+    @Override
+    public Set<String> getAllArchiveItems(Archive archive) throws IOException {
+
+        Set<String> set = new HashSet<>();
+
+        ZipFile zip = new ZipFile(archive.archive);
+        zip.stream().iterator().forEachRemaining(action -> {
+
+            set.add(action.getName());
+        });
+
+        return set;
     }
 }
