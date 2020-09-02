@@ -1,9 +1,8 @@
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
-import com.electronwill.nightconfig.core.file.FileConfig;
-import me.shadowchild.cybernize.setting.Config;
-import me.shadowchild.cybernize.setting.Setting;
-import me.shadowchild.cybernize.setting.SettingsHandler;
-import me.shadowchild.cybernize.setting.SettingsHolder;
+import uk.co.innoxium.cybernize.setting.Config;
+import uk.co.innoxium.cybernize.setting.Setting;
+import uk.co.innoxium.cybernize.setting.SettingsHandler;
+import uk.co.innoxium.cybernize.setting.SettingsHolder;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;

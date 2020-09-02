@@ -1,5 +1,5 @@
-import me.shadowchild.cybernize.util.MathUtils;
-import me.shadowchild.cybernize.util.Utils;
+import uk.co.innoxium.cybernize.util.MathUtils;
+import uk.co.innoxium.cybernize.util.Utils;
 import org.apache.commons.math3.util.Pair;
 
 import java.io.IOException;

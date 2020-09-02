@@ -1,8 +1,8 @@
-import me.shadowchild.cybernize.config.Config;
-import me.shadowchild.cybernize.config.IniConfig;
-import me.shadowchild.cybernize.config.JsonConfig;
-import me.shadowchild.cybernize.config.property.Property;
-import me.shadowchild.cybernize.resource.Resource;
+import uk.co.innoxium.cybernize.config.Config;
+import uk.co.innoxium.cybernize.config.IniConfig;
+import uk.co.innoxium.cybernize.config.JsonConfig;
+import uk.co.innoxium.cybernize.config.property.Property;
+import uk.co.innoxium.cybernize.resource.Resource;
 
 public class NewConfigTest {
 

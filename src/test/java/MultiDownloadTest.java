@@ -1,6 +1,6 @@
-import me.shadowchild.cybernize.util.Download;
-import me.shadowchild.cybernize.util.MathUtils;
-import me.shadowchild.cybernize.util.Utils;
+import uk.co.innoxium.cybernize.util.Download;
+import uk.co.innoxium.cybernize.util.MathUtils;
+import uk.co.innoxium.cybernize.util.Utils;
 
 import javax.swing.*;
 import java.awt.*;

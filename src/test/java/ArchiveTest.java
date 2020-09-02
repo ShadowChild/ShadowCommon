@@ -1,6 +1,6 @@
-import me.shadowchild.cybernize.archive.Archive;
-import me.shadowchild.cybernize.archive.ArchiveBuilder;
-import me.shadowchild.cybernize.zip.ZipUtils;
+import uk.co.innoxium.cybernize.archive.Archive;
+import uk.co.innoxium.cybernize.archive.ArchiveBuilder;
+import uk.co.innoxium.cybernize.zip.ZipUtils;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-import me.shadowchild.cybernize.net.Hastebin;
+import uk.co.innoxium.cybernize.net.Hastebin;
 
 import java.io.IOException;
 

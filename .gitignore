@@ -21,6 +21,6 @@ target/
 /test/
 .gradle/
 build/
-config/
+/config/
 bintray.properties
 run/
