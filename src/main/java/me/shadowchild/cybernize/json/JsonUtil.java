@@ -1,14 +1,9 @@
-package me.shadowchild.cybernize.util;
+package me.shadowchild.cybernize.json;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
@@ -117,5 +112,43 @@ public class JsonUtil {
     public static JsonArray getArray(JsonObject obj, String name) {
 
         return obj.getAsJsonArray(name);
+    }
+
+    public static Gson getGson() {
+
+        return new GsonBuilder().setPrettyPrinting().create();
+    }
+
+    public static FileWriter getFileWriter(File file) throws IOException {
+
+        return new FileWriter(file);
+    }
+
+    // Almost identical to FileUtil.getFile(), but initializes it as a valid json
+    public static File getJsonFile(File path, boolean isFolder) {
+
+        synchronized (path) {
+
+            if (!path.exists()) {
+
+                path.getParentFile().mkdirs();
+                if (isFolder) path.mkdir();
+                else {
+
+                    try {
+
+                        path.createNewFile();
+                        JsonObject obj = new JsonObject();
+                        FileWriter writer = getFileWriter(path);
+                        getGson().toJson(obj, writer);
+                        writer.close();
+                    } catch (IOException e) {
+
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return path;
     }
 }
