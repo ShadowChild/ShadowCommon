@@ -1,6 +1,7 @@
 package uk.co.innoxium.cybernize.archive.extractor;
 
 import uk.co.innoxium.cybernize.archive.Archive;
+import uk.co.innoxium.cybernize.archive.ArchiveItem;
 
 import java.io.*;
 import java.util.HashSet;
@@ -77,14 +78,14 @@ public class ZipExtractor extends ArchiveExtractor {
     }
 
     @Override
-    public Set<String> getAllArchiveItems(Archive archive) throws IOException {
+    public Set<ArchiveItem> getAllArchiveItems(Archive archive) throws IOException {
 
-        Set<String> set = new HashSet<>();
+        Set<ArchiveItem> set = new HashSet<>();
 
         ZipFile zip = new ZipFile(archive.archive);
         zip.stream().iterator().forEachRemaining(action -> {
 
-            set.add(action.getName());
+            set.add(new ArchiveItem(archive.archive.getName(), action.getName(), action.isDirectory()));
         });
 
         return set;

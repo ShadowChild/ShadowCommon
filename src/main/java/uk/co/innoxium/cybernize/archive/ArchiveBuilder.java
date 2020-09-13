@@ -1,6 +1,5 @@
 package uk.co.innoxium.cybernize.archive;
 
-import me.shadowchild.cybernize.archive.extractor.*;
 import uk.co.innoxium.cybernize.archive.extractor.*;
 
 import java.io.File;

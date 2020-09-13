@@ -30,7 +30,7 @@ public class Archive {
         else return false;
     }
 
-    public Set<String> getAllArchiveItems() throws IOException {
+    public Set<ArchiveItem> getAllArchiveItems() throws IOException {
 
         return extractor.getAllArchiveItems(this);
     }

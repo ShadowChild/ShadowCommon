@@ -5,6 +5,7 @@ import net.sf.sevenzipjbinding.*;
 import net.sf.sevenzipjbinding.impl.RandomAccessFileInStream;
 import net.sf.sevenzipjbinding.simple.ISimpleInArchive;
 import net.sf.sevenzipjbinding.simple.ISimpleInArchiveItem;
+import uk.co.innoxium.cybernize.archive.ArchiveItem;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -108,9 +109,9 @@ public class SevenZipExtractor extends ArchiveExtractor {
     }
 
     @Override
-    public Set<String> getAllArchiveItems(Archive archive) throws IOException {
+    public Set<ArchiveItem> getAllArchiveItems(Archive archive) throws IOException {
 
-        Set<String> set = new HashSet<>();
+        Set<ArchiveItem> set = new HashSet<>();
 
         RandomAccessFile randomAccessFile = null;
         IInArchive inArchive = null;
@@ -126,7 +127,7 @@ public class SevenZipExtractor extends ArchiveExtractor {
 
             try {
 
-                set.add(item.getPath());
+                set.add(new ArchiveItem(archive.archive.getName(), item.getPath(), item.isFolder()));
             } catch (SevenZipException e) {
 
                 e.printStackTrace();

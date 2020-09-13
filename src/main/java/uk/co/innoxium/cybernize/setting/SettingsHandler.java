@@ -16,6 +16,8 @@ public class SettingsHandler {
     public static final ArrayList<Class> HOLDERS = new ArrayList<>();
     private static final HashMap<Class, CommentedFileConfig> CONFIG_MAP = new HashMap<>();
 
+    public static File CONFIG_DIR = new File("./config/");
+
     static {
 
         addRuntimeHook();
@@ -57,7 +59,7 @@ public class SettingsHandler {
                         // Load default if the method errors out
                         e.printStackTrace();
                         cfg = CommentedFileConfig
-                                .builder(new File("./config/", id + "toml"))
+                                .builder(new File(CONFIG_DIR, id + "toml"))
                                 .autoreload()
                                 .autosave()
                                 .charset(StandardCharsets.UTF_8)
