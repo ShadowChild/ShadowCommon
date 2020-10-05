@@ -34,4 +34,23 @@ public class Archive {
 
         return extractor.getAllArchiveItems(this);
     }
+
+    /**
+     * Asks the archive if it contains a fileName
+     * @param name The name of the file to look for
+     * @return - Will return true if the file was found
+     * @throws IOException if there is a problem accessing the archive
+     */
+    public boolean containsFile(String name) throws IOException {
+
+        for(ArchiveItem item : getAllArchiveItems()) {
+
+            String itemName = item.getFilePath().toLowerCase();
+            if(itemName.contains(name)) {
+
+                return true;
+            }
+        }
+        return false;
+    }
 }

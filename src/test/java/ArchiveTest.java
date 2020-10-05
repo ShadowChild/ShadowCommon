@@ -33,6 +33,15 @@ public class ArchiveTest {
             seven.getAllArchiveItems().forEach(System.out::println);
             rar.getAllArchiveItems().forEach(System.out::println);
             rar5.getAllArchiveItems().forEach(System.out::println);
+
+            if(rar.containsFile("dali.jpg")) {
+
+                System.out.println("dali was found");
+            }
+            if(rar5.containsFile("dali.jpg")) {
+
+                System.out.println("Dali was also found");
+            }
         } catch (IOException e) {
 
             e.printStackTrace();
