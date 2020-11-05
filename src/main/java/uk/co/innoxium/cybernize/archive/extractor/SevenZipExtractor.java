@@ -1,10 +1,10 @@
 package uk.co.innoxium.cybernize.archive.extractor;
 
-import uk.co.innoxium.cybernize.archive.Archive;
 import net.sf.sevenzipjbinding.*;
 import net.sf.sevenzipjbinding.impl.RandomAccessFileInStream;
 import net.sf.sevenzipjbinding.simple.ISimpleInArchive;
 import net.sf.sevenzipjbinding.simple.ISimpleInArchiveItem;
+import uk.co.innoxium.cybernize.archive.Archive;
 import uk.co.innoxium.cybernize.archive.ArchiveItem;
 
 import java.io.File;
@@ -40,9 +40,11 @@ public class SevenZipExtractor extends ArchiveExtractor {
 
             ISimpleInArchive simpleInArchive = inArchive.getSimpleInterface();
 
+            final String[] lastFilePath = {""};
+
             for(ISimpleInArchiveItem item : simpleInArchive.getArchiveItems()) {
 
-                final int[] hash = new int[] { 0 };
+                final int[] hash = { 0 };
 
                 if(!item.isFolder()) {
 
@@ -54,7 +56,7 @@ public class SevenZipExtractor extends ArchiveExtractor {
                         // write the data to file
                         try {
 
-                            writeToFile(item.getPath(), archive.outputDirectory.getCanonicalPath(), data);
+                            writeToFile(item.getPath(), archive.outputDirectory.getCanonicalPath(), data, lastFilePath[0].equals(item.getPath()));
                         } catch (IOException e) {
 
                             e.printStackTrace();
@@ -62,6 +64,7 @@ public class SevenZipExtractor extends ArchiveExtractor {
 
                         hash[0] ^= Arrays.hashCode(data);
                         sizeArray[0] += data.length;
+                        lastFilePath[0] = item.getPath();
                         return data.length;
                     });
 
@@ -140,13 +143,14 @@ public class SevenZipExtractor extends ArchiveExtractor {
         return set;
     }
 
-    private void writeToFile(String fileName, String parentFile, byte[] data) throws IOException {
+    private void writeToFile(String fileName, String parentFile, byte[] data, boolean append) throws IOException {
 
         FileOutputStream fos;
         File file = new File(parentFile, fileName);
         file.getParentFile().mkdirs();
-        fos = new FileOutputStream(file);
+        fos = new FileOutputStream(file, append);
         fos.write(data);
+        fos.flush();
         fos.close();
     }
 }

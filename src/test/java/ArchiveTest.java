@@ -22,17 +22,24 @@ public class ArchiveTest {
 
         Archive archive = new ArchiveBuilder(new File(".", "run.zip")).type(ArchiveBuilder.ArchiveType.ZIP).build();
 
+        Archive realtest = new ArchiveBuilder(new File(".", "realworld.zip")).type(ArchiveBuilder.ArchiveType.SEVEN_ZIP)
+                .outputDirectory(new File(".", "real")).build();
+
         try {
 
             zip.extract();
             seven.extract();
             rar.extract();
             rar5.extract();
+            realtest.extract();
             archive.getAllArchiveItems().forEach(System.out::println);
             zip.getAllArchiveItems().forEach(System.out::println);
             seven.getAllArchiveItems().forEach(System.out::println);
             rar.getAllArchiveItems().forEach(System.out::println);
             rar5.getAllArchiveItems().forEach(System.out::println);
+            rar5.getAllArchiveItems().forEach(System.out::println);
+            rar5.getAllArchiveItems().forEach(System.out::println);
+            realtest.getAllArchiveItems().forEach(System.out::println);
 
             if(rar.containsFile("dali.jpg")) {
 
