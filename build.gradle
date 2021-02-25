@@ -1,11 +1,7 @@
 plugins {
 
     id 'java'
-    id "com.jfrog.bintray" version '1.8.5'
 }
-
-def props = new Properties()
-file("bintray.properties").withInputStream { props.load(it) }
 
 apply plugin: "maven"
 apply plugin: "maven-publish"
@@ -17,6 +13,8 @@ group 'uk.co.innoxium.cybernize'
 version '1.0-SNAPSHOT'
 
 project.ext.sevenZipVersion = "16.02-2.01"
+def repsyUser = "user"
+def repsyPass = "passw"
 
 repositories {
 
@@ -79,31 +77,16 @@ publishing {
             version '1.1.5'
         }
     }
-}
+    repositories {
 
-bintray {
+        maven {
 
-//    dryRun = true
-    user = props.get("username")
-    key = props.get("apiKey")
-    publications = ['CybernizePublication']
-//    filesSpec {
-//
-//        from 'build/libs'
-//        into '.'
-//    }
-    pkg {
+            url "https://repo.repsy.io/mvn/innoxium/innoxium"
+            credentials {
 
-        repo = 'cybernize'
-        name = 'cybernize'
-        userOrg = 'candor'
-        vcsUrl = 'https://github.com/ShadowChild/Cybernize2.git'
-        licenses = ['MIT']
-        version {
-
-            name = '1.1.5'
-            desc = 'SevenZip archive now correctly exatrct files over the 32Kb buffer size'
-            released = new Date()
+                username repsyUser
+                password repsyPass
+            }
         }
     }
 }
