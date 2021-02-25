@@ -1,10 +1,10 @@
 package uk.co.innoxium.cybernize.util;
 
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -129,7 +129,7 @@ public class Download extends Observable implements Runnable {
 
         try {
             // Open connection to URL.
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
 
             // Specify what portion of file to download.
             connection.setRequestProperty("Range", "bytes=" + downloaded + "-");
@@ -139,18 +139,23 @@ public class Download extends Observable implements Runnable {
 
             // Make sure response code is in the 200 range.
             if(connection.getResponseCode() / 100 != 2) {
+
                 error();
+                return;
             }
 
             // Check for valid content length.
             int contentLength = connection.getContentLength();
             if(contentLength < 1) {
+
                 error();
+                return;
             }
 
       /* Set the size for this download if it
          hasn't been already set. */
             if(size == -1) {
+
                 size = contentLength;
                 stateChanged();
             }

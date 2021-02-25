@@ -50,7 +50,7 @@ public class DownloadObserverTest extends JDialog {
 
             try {
 
-                Utils.downloadFile("http://build.lwjgl.org/stable/lwjgl.zip",
+                Utils.downloadFile("https://repo.repsy.io/mvn/innoxium/innoxium/uk/co/innoxium/candor/candor-genericmodule/0.2.0/candor-genericmodule-0.2.0.jar",
                         new DownloadObserver(), new File(".", "test")
                 );
             } catch(IOException e1) {
@@ -97,6 +97,10 @@ public class DownloadObserverTest extends JDialog {
                 case Download.COMPLETE: {
 
                     JOptionPane.showMessageDialog(dialog, "File completed successfully");
+                }
+                case Download.ERROR: {
+
+                    JOptionPane.showMessageDialog(dialog, "An Error Occured");
                 }
             }
         }
