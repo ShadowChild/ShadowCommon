@@ -4,6 +4,7 @@ package uk.co.innoxium.cybernize.util;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Observable;
@@ -148,6 +149,12 @@ public class Download extends Observable implements Runnable {
             int contentLength = connection.getContentLength();
             if(contentLength < 1) {
 
+                stateChanged();
+                // If this method gets hit, there will be no reporting of status
+                if(tryStreamDataInstead(connection)) {
+
+                    return;
+                }
                 error();
                 return;
             }
@@ -196,6 +203,7 @@ public class Download extends Observable implements Runnable {
                 stateChanged();
             }
         } catch(Exception e) {
+
             error();
             e.printStackTrace();
         } finally {
@@ -219,6 +227,61 @@ public class Download extends Observable implements Runnable {
         }
     }
 
+    private boolean tryStreamDataInstead(HttpsURLConnection connection) {
+
+        File file;
+        InputStream stream = null;
+        FileOutputStream outputStream = null;
+
+        try {
+
+            file = new File(folder, Utils.getFileName(url));
+
+            if(!file.getParentFile().exists()) file.getParentFile().mkdirs();
+            outputStream = new FileOutputStream(file);
+
+            stream = connection.getInputStream();
+
+            while(status == DOWNLOADING) {
+
+                stream.transferTo(outputStream);
+                System.out.println("Downloaded");
+                status = COMPLETE;
+                stateChanged();
+            }
+            return true;
+        } catch(IOException e) {
+
+            e.printStackTrace();
+        } finally {
+
+            // Close file.
+            if(outputStream != null) {
+
+                try {
+
+                    outputStream.close();
+                } catch(Exception e) {
+
+                    e.printStackTrace();
+                }
+            }
+
+            // Close connection to server.
+            if(stream != null) {
+
+                try {
+
+                    stream.close();
+                } catch(Exception e) {
+
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
+
     // Notify observers that this download's status has changed.
     private void stateChanged() {
 
@@ -235,23 +298,11 @@ public class Download extends Observable implements Runnable {
 
             switch(download.status) {
 
-                case DOWNLOADING: {
-
-                    System.out.println("Progress = " + download.getProgress() + ", " +
-                            MathUtils.humanReadableByteCount(download.downloaded, false) + " / " +
-                            MathUtils.humanReadableByteCount(download.size, false));
-                    break;
-                }
-                case COMPLETE: {
-
-                    System.out.print("File Download Completed");
-                    break;
-                }
-                case ERROR: {
-
-                    System.out.println("An Error Has Occurred");
-                    break;
-                }
+                case DOWNLOADING -> System.out.println("Progress = " + download.getProgress() + ", " +
+                        MathUtils.humanReadableByteCount(download.downloaded, false) + " / " +
+                        MathUtils.humanReadableByteCount(download.size, false));
+                case COMPLETE -> System.out.print("File Download Completed");
+                case ERROR -> System.out.println("An Error Has Occurred");
             }
         }
     }

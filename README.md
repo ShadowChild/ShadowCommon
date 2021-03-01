@@ -9,20 +9,20 @@ Below is how you would implement this project into either maven or gradle
 ```xml
 <repositories>
         <repository>
-                <id>bintray1</id>
-                <name>Cybernize repo</name>
-                <url>https://dl.bintray.com/candor/cybernize</url>
+                <id>innoxium</id>
+                <name>Innoxium repo</name>
+                <url>https://repo.repsy.io/mvn/innoxium/innoxium</url>
         </repository>
 </repositories>
 
 <properties>
-        <cynbernize.version>1.0</cynbernize.version>
+        <cynbernize.version>1.1.5</cynbernize.version>
 </properties>
 
 <dependencies>
   <dependency>
-    <groupId>me.github.shadowchild</groupId>
-    <artifactId>cybernize2</artifactId>
+    <groupId>uk.co.innoxium.cybernize</groupId>
+    <artifactId>cybernize</artifactId>
     <version>${cybernize.version}</version>
   </dependency>
 </dependencies>
@@ -32,13 +32,13 @@ Below is how you would implement this project into either maven or gradle
 ```groovy
 repositories {
 
-    maven { url = "https://dl.bintray.com/candor/cybernize" }
+    maven { url = "https://repo.repsy.io/mvn/innoxium/innoxium" }
 }
 
-project.ext.cybernizeVersion = "1.0"
+project.ext.cybernizeVersion = "1.1.5"
 
 dependencies {
 
-    implmentation "me.github.shadowchild:cybernize2:${cybernizeVersion}"
+    implmentation "uk.co.innoxium.cybernize:cybernize:${cybernizeVersion}"
 }
 ```

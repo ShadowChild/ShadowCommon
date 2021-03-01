@@ -26,7 +26,7 @@ public class Hastebin {
         conn.setDoOutput(true);
         conn.setInstanceFollowRedirects(false);
         conn.setRequestMethod("POST");
-        conn.setRequestProperty("User-Agent", "Cybernize2 Hastebin Java Api");
+        conn.setRequestProperty("User-Agent", "Cybernize Hastebin Java Api");
         conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
         conn.setUseCaches(false);
 

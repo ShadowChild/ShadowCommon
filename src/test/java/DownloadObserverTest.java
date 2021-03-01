@@ -87,21 +87,13 @@ public class DownloadObserverTest extends JDialog {
 
             Download download = (Download)o;
             switch(download.getStatus()) {
+                case Download.DOWNLOADING -> {
 
-                case Download.DOWNLOADING: {
-
-                    dialog.progressBar1.setValue((int)download.getProgress());
+                    dialog.progressBar1.setValue((int) download.getProgress());
                     dialog.dataLabel.setText(getByteProgress(download));
-                    break;
                 }
-                case Download.COMPLETE: {
-
-                    JOptionPane.showMessageDialog(dialog, "File completed successfully");
-                }
-                case Download.ERROR: {
-
-                    JOptionPane.showMessageDialog(dialog, "An Error Occured");
-                }
+                case Download.COMPLETE -> JOptionPane.showMessageDialog(dialog, "File completed successfully");
+                case Download.ERROR -> JOptionPane.showMessageDialog(dialog, "An Error Occured");
             }
         }
     }
