@@ -1,6 +1,6 @@
+import org.apache.commons.math3.util.Pair;
 import uk.co.innoxium.cybernize.util.MathUtils;
 import uk.co.innoxium.cybernize.util.Utils;
-import org.apache.commons.math3.util.Pair;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ public class DownloadTest {
 
         try {
 
-            Utils.downloadFile("http://build.lwjgl.org/stable/lwjgl.zip");
+            Utils.downloadFile("https://build.lwjgl.org/stable/lwjgl.zip");
             Pair<Float, String> size = MathUtils.humanReadableByteCount(45645645456L);
             System.out.println(
                     String.format("Size = %s, Type = %s", size.getFirst(), size.getSecond()));

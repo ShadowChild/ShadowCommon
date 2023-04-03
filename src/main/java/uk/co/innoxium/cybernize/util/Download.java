@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -130,7 +131,14 @@ public class Download extends Observable implements Runnable {
 
         try {
             // Open connection to URL.
-            HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+
+            HttpURLConnection connection;
+            switch(url.getProtocol()) {
+
+                case "http" -> connection = (HttpURLConnection)url.openConnection();
+                case "https" -> connection = (HttpsURLConnection)url.openConnection();
+                default -> throw new IOException(String.format("Invalid Protocol \"%s\", must either be http or https", url.getProtocol()));
+            }
 
             // Specify what portion of file to download.
             connection.setRequestProperty("Range", "bytes=" + downloaded + "-");
@@ -227,7 +235,7 @@ public class Download extends Observable implements Runnable {
         }
     }
 
-    private boolean tryStreamDataInstead(HttpsURLConnection connection) {
+    private boolean tryStreamDataInstead(HttpURLConnection connection) {
 
         File file;
         InputStream stream = null;

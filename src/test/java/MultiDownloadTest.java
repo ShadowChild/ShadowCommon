@@ -23,9 +23,12 @@ public class MultiDownloadTest extends JDialog {
 
     private static MultiDownloadTest dialog;
     private List<String> downloads = new ArrayList<>();
-    private MultiDownloadObserver observer = new MultiDownloadObserver(downloads);
+    private MultiDownloadObserver observer;
 
     public MultiDownloadTest() {
+
+
+        setupUI();
 
         dialog = this;
         setContentPane(contentPane);
@@ -33,8 +36,10 @@ public class MultiDownloadTest extends JDialog {
         getRootPane().setDefaultButton(downloadButton);
         
         // Add some file to the download list
-        downloads.add("http://build.lwjgl.org/stable/lwjgl.zip");
+        downloads.add("https://build.lwjgl.org/stable/lwjgl.zip");
         downloads.add("http://silenceengine.goharsha.com/downloads/SEProjectCreator.jar");
+
+        observer = new MultiDownloadObserver(downloads);
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -51,21 +56,7 @@ public class MultiDownloadTest extends JDialog {
                 KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
                 JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT
         );
-        downloadButton.addActionListener(e -> {
 
-            try {
-
-                multiDownloadFile(downloads);
-            } catch(IOException e1) {
-
-                e1.printStackTrace();
-            }
-        });
-    }
-
-    {
-    	// ensures the components have been initialised
-        setupUI();
     }
 
     private void setupUI() {
@@ -80,6 +71,16 @@ public class MultiDownloadTest extends JDialog {
         contentPane.add(dataLabel);
         downloadButton = new JButton();
         downloadButton.setText("Download");
+        downloadButton.addActionListener(e -> {
+
+            try {
+
+                multiDownloadFile(downloads);
+            } catch(IOException e1) {
+
+                e1.printStackTrace();
+            }
+        });
         contentPane.add(downloadButton, BorderLayout.SOUTH);
     }
 
@@ -107,6 +108,7 @@ public class MultiDownloadTest extends JDialog {
                 case Download.COMPLETE: {
 
                     JOptionPane.showMessageDialog(dialog, "File completed successfully");
+                    break;
                 }
             }
         }
@@ -136,7 +138,7 @@ public class MultiDownloadTest extends JDialog {
 
     	// Initialise the test
         DownloadObserverTest dialog = new DownloadObserverTest();
-        dialog.setTitle("Download Test");
+        dialog.setTitle("Multi Download Test");
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);

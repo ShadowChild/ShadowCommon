@@ -9,10 +9,14 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 /**
+ *
+ * @Deprecated Hastebin has been mangled and no longer exists, looking in to an alternative
+ *
  * Modified to work with hasteb.in rather than hastebin.com
  *
  * @Author Kaimu-kun at https://github.com/kaimu-kun/hastebin.java
  */
+@Deprecated(since = "1.1.7")
 public class Hastebin {
 
     public static String post(String text, boolean raw) throws IOException {
